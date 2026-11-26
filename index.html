@@ -502,7 +502,7 @@
             </div>
 
             <p class="font-bengali text-sm text-stone-200 leading-relaxed mb-6">
-              স্টুডিওর প্রধান অ্যানালগ ভল্টটি ৪-সংখ্যার একটি অডিও ফ্রিকোয়েন্সি কোড দ্বারা সুরক্ষিত। <span class="text-amber-300 font-bold">EV-01 (Analog Reel-to-Reel Audio Console)</span>-এর অডিও ফাইলগুলো পরীক্ষা করে এবং <span class="text-amber-300 font-bold">Frequency Analyzer</span> ব্যবহার করে গোপন কোডটি উদ্ধার করুন।
+              স্টুডিওর প্রধান অ্যানালগ ভল্টটি ৪-সংখ্যার একটি অডিও ফ্রিকোয়েন্সি কোড দ্বারা সুরক্ষিত। <span class="text-amber-300 font-bold">EV-06 (Analog Reel-to-Reel Audio Console)</span>-এর অডিও ফাইলগুলো পরীক্ষা করে এবং <span class="text-amber-300 font-bold">Frequency Analyzer</span> ব্যবহার করে গোপন কোডটি উদ্ধার করুন।
             </p>
 
             <!-- 4-Digit Display -->
@@ -550,7 +550,7 @@
 
               <!-- Vault Error -->
               <div id="vault-error" class="hidden mt-4 bg-crimson/20 border border-crimson text-red-300 px-3.5 py-2.5 rounded-sm font-typewriter text-xs">
-                FREQUENCY MISMATCH — RE-ANALYZE CORRUPTED TAPE (EV-01)
+                FREQUENCY MISMATCH — RE-ANALYZE CORRUPTED TAPE (EV-06)
               </div>
             </div>
           </div>
@@ -596,7 +596,7 @@
                     লেবেলের বাজেট ও চুক্তি পুনর্গঠনের কারণে <strong>সৌম্যজিৎ শেখর সাহা</strong>-কে উক্ত ₹১,০০,০০০ টাকা প্রদান করা হবে, তবে মূল স্ট্রিং ও রিদম অ্যারেঞ্জারদের তালিকা থেকে অন্যান্য সহযোগী মিউজিশিয়ানদের নাম ও প্রাপ্য বকেয়া স্থগিত রাখা হলো।
                   </p>
                 </div>
-                <p class="font-tiro italic text-stone-700 text-sm">
+                <p class="font-signature text-stone-700 text-lg">
                   — খসড়ার নিচে নীল কালিতে অস্পষ্ট হাতে লেখা নোট: “সব টাকা আর ক্রেডিট যদি একজনই নিয়ে যায়, তবে আমার রাতজাগা সুরের মূল্য কী? টেপটাই আর থাকতে দেব না!”
                 </p>
               </div>
@@ -751,7 +751,7 @@
       'use strict';
 
       /* ------------------------------------------------------------------- */
-      /* APPLICATION STATE                                                   */
+      /* APPLICATION STATE & CASE DATABASE                                   */
       /* ------------------------------------------------------------------- */
       const state = {
         authenticated: false,
@@ -759,377 +759,322 @@
         examinedFiles: new Set(),
         vaultUnlocked: false,
         caseSolved: false,
-        // Ambient Detective Tone & Haptics State
-        ambientEnabled: true,
-        ambientRunning: false,
-        ambientGain: null,
-        ambientTimer: null,
-        ambientNodes: [],
-        // Audio Player State
         audioCtx: null,
         analyser: null,
         masterGain: null,
-        currentTrackId: null,
         isPlaying: false,
+        currentTrackId: null,
         analyzerEnabled: false,
+        activeNodes: [],
         trackTimer: null,
         animFrameId: null,
-        activeNodes: [],
         trackStartTime: 0,
-        trackDuration: 12,
-        decodedDigits: [],
+        trackDuration: 10,
+        ambientEnabled: true,
+        ambientRunning: false,
+        ambientNodes: [],
+        ambientGain: null,
+        ambientTimer: null,
       };
 
-      /* ------------------------------------------------------------------- */
-      /* EVIDENCE DATABASE (7 INTERACTIVE FILES — ZERO PLOT HOLES)           */
-      /* ------------------------------------------------------------------- */
+      const AUDIO_TRACKS = [
+        {
+          id: 'track-1',
+          filename: 'Master_Demo_Snippet.wav',
+          timestamp: '2:14 AM Backup',
+          duration: 10.5,
+          description:
+            'অটো-ব্যাকআপ সার্ভার থেকে উদ্ধার করা ২:১৪ AM-এর শেষ অক্ষত অডিও ক্লিপ। এতে অ্যাকোস্টিক গ্র্যান্ড পিয়ানোয় A Minor (A - C - E - G) কর্ড প্রোগ্রেশন ও ছন্দ শোনা যায়—যা প্রমাণ করে ট্র্যাকটি কোনো ডিজিটাল MIDI কন্ট্রোলারে নয়, সরাসরি অ্যানালগ স্টুডিও সেটআপে রেকর্ড করা হয়েছিল।',
+        },
+        {
+          id: 'track-2',
+          filename: 'Corrupted_Tape_440Hz.wav',
+          timestamp: 'Hidden Frequency Clue',
+          duration: 11.5,
+          description:
+            'ওভাররাইট করা টেপের ভেতরে লুকানো ক্যারিয়ার সিগন্যাল। উপরের Frequency Analyzer চালু করে এই অডিওটি পরীক্ষা করুন।',
+        },
+        {
+          id: 'track-3',
+          filename: 'Studio_Door_Mic_Leak.wav',
+          timestamp: '3:05 AM Ambient Leak',
+          duration: 10.5,
+          description:
+            'স্টুডিও রুম-বি-র দরজার পাশের মাইক্রোফোনে ধরা পড়া অ্যাম্বিয়েন্ট লিকড অডিও—মনোযোগ দিয়ে শুনুন।',
+        },
+      ];
+
       const EVIDENCE_FILES = [
         {
           id: 'EV-01',
-          code: 'WITNESS LOG',
           title: 'সিকিউরিটি গার্ড হরিপদ দার জবানবন্দি',
-          subtitle: 'Night Shift Security Statement — Tollygunge Gate',
-          tag: 'TESTIMONY',
-          accent: 'stone',
-          summary:
-            'রাত ২:০০টায় মেইন করিডোরে ১৫ মিনিটের জেনারেটর সুইচওভার ব্ল্যাকআউট হয়, ফলে ডিজিটাল কিকার্ড লগ বন্ধ ছিল।',
+          subtitle: 'Lalbazar Interrogation Statement #01',
+          tag: 'WITNESS LOG',
+          summary: 'রাত ২:০০টায় জেনারেটর সুইচওভারের সময় ১৫ মিনিটের ব্ল্যাকআউট এবং ডিজিটাল কিকার্ড লগ বন্ধ হয়ে যাওয়ার বিবরণ।',
           renderContent: () => `
-            <div class="bg-parchment text-stone-900 p-6 sm:p-7 rounded-sm border border-stone-400 shadow-inner relative">
-              <div class="flex flex-wrap justify-between items-start gap-2 border-b-2 border-stone-800 pb-3 mb-4">
+            <div class="manila-folder border-2 border-stone-700 p-6 rounded-sm relative">
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-stone-800 pb-3 mb-4">
                 <div>
-                  <p class="font-mono text-[11px] uppercase tracking-widest text-stone-600">STATEMENT RECORD // KOLKATA AUDIO ARCHIVE</p>
-                  <h4 class="font-bengali text-xl font-bold text-stone-950">সাক্ষী: হরিপদ মণ্ডল (নাইট সিকিউরিটি গার্ড)</h4>
+                  <p class="font-typewriter text-xs text-stone-700 font-bold">LALBAZAR DETECTIVE DEPT. — WITNESS STATEMENT</p>
+                  <h4 class="font-bengali text-xl font-extrabold text-stone-950">জবানবন্দি: হরিপদ মণ্ডল (নাইট গার্ড, স্টুডিও ৭)</h4>
                 </div>
-                <span class="ink-stamp text-crimson text-[10px]">VERIFIED STATEMENT</span>
+                <span class="ink-stamp text-crimson text-[11px] rotate-2">RECORDED STATEMENT</span>
               </div>
-              <div class="space-y-3.5 font-bengali text-sm sm:text-base leading-relaxed text-stone-800">
-                <p>“স্যার, আমি সন্ধ্যা ৭টা থেকে মেইন গেটেই ছিলাম। ডাঃ অন্তর্জিতা ম্যাডাম রাত ঠিক ৯:০০টায় গাড়ি নিয়ে বেরিয়ে যান। গায়িকা দেবযানী ম্যাডাম ও তন্ময় বাবু রাত ১১:০০টার মধ্যেই রেকর্ডিং সেরে চলে যান। মালিকের ছেলে রাহুল বাবু সেদিন স্টুডিওতেই আসেননি—পরে শুনেছি পার্ক স্ট্রিটে পার্টিতে ছিলেন।”</p>
-                <p>“সৌম্যজিৎ বাবু ও ঋত্বিক বাবু রাত <strong>১:৩০টায়</strong> মেইন গেটের খাতায় সই করে একসাথে বেরিয়ে যান। তবে স্যার, স্টুডিও রুম-বি-র পেছনের লোডিং করিডোর দিয়ে ভেতরে ঢোকার একটা পুরনো কাঠের দরজা আছে।”</p>
-                <div class="bg-amber-900/10 border-l-4 border-ambervu p-3.5 rounded-sm">
-                  <p class="font-semibold text-stone-950">গুরুত্বপূর্ণ তথ্য (ব্ল্যাকআউট):</p>
-                  <p>“রাত ঠিক <strong>২:০০ AM</strong> নাগাদ লোডশেডিং হওয়ায় জেনারেটর সুইচওভার করতে গিয়ে মেইন করিডোরে পুরো <strong>১৫ মিনিট (২:০০ AM থেকে ২:১৫ AM)</strong> সম্পূর্ণ অন্ধকার ছিল। ওই সময় ডিজিটাল কিকার্ড লগ সম্পূর্ণ বন্ধ হয়ে যায়।”</p>
+              <div class="space-y-3 font-bengali text-sm sm:text-base text-stone-900 leading-relaxed">
+                <p>“স্যার, আমি রাত ৮টা থেকে সকাল ৮টা পর্যন্ত স্টুডিও ৭-এর মেইন গেটে ডিউটিতে ছিলাম। রাত ১:৩০টার দিকে সৌম্যজিৎ বাবু আর ঋত্বিক বাবু একসাথে মেইন গেটের খাতায় সাইন করে বেরিয়ে যান। আমি নিজে গেট লক করে দিই।”</p>
+                <div class="bg-crimson/10 border-l-4 border-crimson p-3.5 rounded-sm">
+                  <p class="font-bold text-crimson">গুরুত্বপূর্ণ তথ্য (ব্ল্যাকআউট):</p>
+                  <p>“ঠিক রাত <strong>০২:০০ AM</strong>-এ সিইএসসি-র লাইন চলে যায়। স্টুডিওর পুরনো জেনারেটর চালু করতে পুরো <strong>১৫ মিনিট (০২:০০ AM থেকে ০২:১৫ AM)</strong> মেইন করিডোর অন্ধকার ছিল। ওই ১৫ মিনিট স্টুডিওর ডিজিটাল কিকার্ড লক সম্পূর্ণ বন্ধ হয়ে যায়।”</p>
                 </div>
-              </div>
-              <div class="mt-5 pt-3 border-t border-stone-400 flex justify-between font-mono text-[11px] text-stone-600">
-                <span>SIGNED: হরিপদ মণ্ডল</span>
-                <span>RECORDED: 07:30 AM</span>
+                <p>“স্টুডিওর পেছনের কাঠের দরজাটা ভেতর থেকে ছিটকিনি দেওয়া থাকে, কিন্তু জেনারেটর ঘরে যাওয়ার সময় আমি ওই দিকে নজর রাখতে পারিনি।”</p>
               </div>
             </div>
           `,
         },
         {
           id: 'EV-02',
-          code: 'MAINTENANCE',
           title: 'স্টুডিও ইলেকট্রিশিয়ানের পুরনো রসিদ',
-          subtitle: 'Electrical Maintenance Memo — Console Clock Fault',
-          tag: 'TECHNICAL CLUE',
-          accent: 'amber',
-          summary:
-            'জেনারেটর সুইচওভারের সময় স্টুডিওর দেয়ালে লাগানো ডিজিটাল কনসোল ঘড়িটি ঠিক ১৫ মিনিট পিছিয়ে যায়।',
+          subtitle: 'Maintenance Memo #94-B // Clock Drift Note',
+          tag: 'TECHNICAL MEMO',
+          summary: 'জেনারেটর সুইচওভারের সময় স্টুডিওর দেয়াল-ঘড়ি ও কনসোল ঘড়ি ঠিক ১৫ মিনিট পিছিয়ে যাওয়ার কারিগরি নোট।',
           renderContent: () => `
-            <div class="bg-parchment text-stone-900 p-6 sm:p-7 rounded-sm border-2 border-dashed border-stone-500 relative">
-              <div class="flex flex-wrap justify-between items-center gap-2 border-b border-stone-400 pb-3 mb-4">
+            <div class="manila-folder border-2 border-stone-700 p-6 rounded-sm">
+              <div class="flex items-center justify-between border-b-2 border-stone-800 pb-3 mb-4">
                 <div>
-                  <p class="font-mono text-xs font-bold text-stone-700">M/S GHOSH ELECTRICALS, TOLLYGUNGE</p>
-                  <p class="font-mono text-[11px] text-stone-500">SERVICE RECEIPT #GE-1995-884</p>
+                  <p class="font-typewriter text-xs text-stone-700 font-bold">TOLLYGUNGE ELECTRICAL &amp; SOUND SERVICES</p>
+                  <h4 class="font-bengali text-xl font-extrabold text-stone-950">মেরামতি ও কারিগরি সতর্কতা রসিদ</h4>
                 </div>
-                <span class="ink-stamp text-stone-700 text-[10px]">PAID // ARCHIVED</span>
+                <span class="font-typewriter text-xs bg-stone-900 text-ambervu px-2.5 py-1 rounded-sm font-bold">BILL #409</span>
               </div>
-              <div class="space-y-3 font-bengali text-sm sm:text-base text-stone-800">
-                <p><strong>কাজের বিবরণ:</strong> স্টুডিও রুম-বি-র জেনারেটর চেঞ্জ-ওভার সুইচ ও ওয়াল কনসোল সার্কিট পরীক্ষা।</p>
-                <div class="bg-stone-900/5 border border-stone-400 p-4 rounded-sm">
-                  <p class="font-mono text-xs uppercase text-crimson font-bold mb-1">TECHNICIAN WARNING NOTE:</p>
-                  <p class="font-bengali text-stone-900 font-medium">
-                    “স্টুডিওর দেয়ালের ডিজিটাল কনসোল ঘড়িটির ব্যাকআপ ক্যাপাসিটর দুর্বল হয়ে গেছে। প্রতিবার <strong>জেনারেটর সুইচওভার</strong> হলে ঘড়িটি আসল সময়ের চেয়ে ঠিক <strong>১৫ মিনিট পিছিয়ে (15 minutes lag)</strong> পড়ে। ম্যানুয়ালি ঠিক না করা পর্যন্ত ঘড়িটি ভুল সময় দেখায়।”
-                  </p>
+              <div class="space-y-3 font-bengali text-sm sm:text-base text-stone-900 leading-relaxed">
+                <p><strong>বিষয়:</strong> স্টুডিও রুম-বি-র দেয়াল-সংলগ্ন ডিজিটাল কনসোল ঘড়ির টাইম-রিসেট ত্রুটি।</p>
+                <div class="bg-amber-900/15 border border-amber-800 p-4 rounded-sm">
+                  <p class="font-bold text-stone-950">ইলেকট্রিশিয়ানের নোট:</p>
+                  <p>“মেইন পাওয়ার থেকে জেনারেটর সুইচওভারের সময় ভোল্টেজ ড্রপ হলে স্টুডিওর কনসোল ঘড়িটি স্বয়ংক্রিয়ভাবে ঠিক <strong>১৫ মিনিট পিছিয়ে (15 minutes slow)</strong> যায়। ম্যানুয়ালি ঠিক না করা পর্যন্ত এটি আসল সময়ের চেয়ে ১৫ মিনিট কম দেখায়।”</p>
                 </div>
-                <p class="font-mono text-xs text-stone-600 pt-2">
-                  FORMULA: ACTUAL TIME = CONSOLE CLOCK + 15 MINUTES (POST-SWITCHOVER)
-                </p>
               </div>
             </div>
           `,
         },
         {
           id: 'EV-03',
-          code: 'CRIME SCENE',
-          title: 'থামে যাওয়া স্টুডিও কনসোল ঘড়ির ছবি',
-          subtitle: 'Surge-Frozen Digital Wall Clock — Studio Room B',
-          tag: 'TIMESTAMP',
-          accent: 'crimson',
-          summary:
-            'হঠাৎ ভোল্টেজ সার্জের কারণে স্টুডিও রুম-বি-র দেয়ালের ডিজিটাল কনসোল ঘড়িটি 02:50 AM-এ থেমে গেছে।',
+          title: 'থেমে যাওয়া স্টুডিও কনসোল ঘড়ির ছবি',
+          subtitle: 'Crime Scene Photo #04 // Control Room B',
+          tag: 'PHOTO EXHIBIT',
+          summary: 'ভোল্টেজ সার্জে থেমে যাওয়া স্টুডিও কনসোলের ডিজিটাল ঘড়ির ফরেনসিক আলোকচিত্র।',
           renderContent: () => `
-            <div class="bg-stone-950 border border-stone-700 p-6 rounded-sm text-center">
-              <p class="font-mono text-[11px] uppercase tracking-widest text-stone-400 mb-4">
-                PHOTOGRAPH #CS-04 // STUDIO ROOM B CONSOLE WALL (FROZEN BY POWER SURGE)
+            <div class="bg-stone-950 border-2 border-khaki p-6 rounded-sm text-center">
+              <p class="font-typewriter text-xs text-ambervu uppercase tracking-widest mb-4">
+                FORENSIC PHOTOGRAPH // STUDIO ROOM-B CONSOLE CLOCK
               </p>
-
-              <!-- Crisp Vintage Red LED Studio Clock SVG -->
-              <div class="max-w-md mx-auto bg-stone-900 border-4 border-stone-700 rounded-sm p-6 shadow-2xl relative">
-                <div class="flex items-center justify-between text-[10px] font-mono text-stone-500 mb-2">
-                  <span>SYNC: EXTERNAL</span>
-                  <span class="text-crimson font-bold">● SURGE HALT</span>
+              <div class="max-w-md mx-auto bg-black border-4 border-stone-800 p-6 rounded-sm shadow-inner my-4">
+                <div class="font-mono text-5xl sm:text-6xl font-bold tracking-widest text-red-600 drop-shadow-[0_0_12px_rgba(220,38,38,0.75)]">
+                  02:50 AM
                 </div>
-                <div class="bg-black border border-stone-800 py-5 px-4 rounded-sm shadow-inner">
-                  <div class="font-mono text-5xl sm:text-6xl font-bold tracking-[0.15em] text-red-600 drop-shadow-[0_0_12px_rgba(220,38,38,0.65)]">
-                    02:50
-                  </div>
-                  <div class="font-mono text-xs tracking-[0.35em] text-red-500/80 mt-2">
-                    AM // DISPLAY FROZEN
-                  </div>
-                </div>
-                <div class="mt-3 flex justify-between font-mono text-[10px] text-stone-500">
-                  <span>MODEL: TASCAM-CLK 92</span>
-                  <span>FUSE BLOWN</span>
-                </div>
-              </div>
-
-              <div class="mt-6 max-w-xl mx-auto text-left bg-console border border-stone-800 border-l-4 border-l-ambervu p-4 rounded-sm">
-                <p class="font-bengali text-sm text-stone-200 leading-relaxed">
-                  <strong>ফরেনসিক বিশ্লেষণ:</strong> মাস্টার ড্রাইভ মুছে ফেলার মুহূর্তে হঠাৎ বৈদ্যুতিক সার্জে দেয়ালের ঘড়িটি <span class="font-mono text-red-400 font-bold">02:50 AM</span>-এ আটকে যায়। অপরাধের প্রকৃত সময় নিশ্চিত করতে স্টুডিওর ইলেকট্রিক্যাল ও জেনারেটর সংক্রান্ত অন্যান্য নথির সঙ্গে এই সময়টি মিলিয়ে দেখুন।
+                <p class="font-typewriter text-[11px] text-stone-500 mt-3 uppercase">
+                  LED DISPLAY FROZEN // SURGE FUSE BLOWN
                 </p>
               </div>
+              <p class="font-bengali text-sm text-stone-300 max-w-xl mx-auto mt-4 leading-relaxed">
+                রাত গভীর হওয়ার পর একটি আকস্মিক ভোল্টেজ সার্জে কনসোলের এই ডিজিটাল ঘড়িটির ফিউজ পুড়ে যায় এবং সময়টি চিরতরে থেমে থাকে।
+              </p>
             </div>
           `,
         },
         {
           id: 'EV-04',
-          code: 'ENGINEER LOG',
           title: 'সাউন্ড ইঞ্জিনিয়ারের লগবুক',
-          subtitle: 'Handwritten Studio Patch & Console Inspection Notes',
-          tag: 'NOTEBOOK',
-          accent: 'stone',
-          summary:
-            'কাস্টম অ্যানালগ-টু-ডিজিটাল প্যাচ কেবল ব্যবহার করে মাস্টার ট্র্যাক ওভাররাইড করা হয়েছে এবং কনসোলের পাশে গিটার পিক ও ক্যাপোর দাগ পাওয়া গেছে।',
+          subtitle: 'Handwritten Studio Shift Log // Room B',
+          tag: 'LOGBOOK ENTRY',
+          summary: 'কাস্টম অ্যানালগ-টু-ডিজিটাল প্যাচ কেবল ব্যবহার করে মাস্টার ট্র্যাক মুছে ফেলা এবং কনসোলের পাশে পড়ে থাকা সূত্রের বিবরণ।',
           renderContent: () => `
-            <div class="lined-paper p-6 sm:p-8 pl-12 sm:pl-14 rounded-sm border border-stone-400 shadow-xl">
-              <div class="flex flex-wrap justify-between items-center mb-3">
-                <span class="font-mono text-xs font-bold uppercase text-crimson">SOUND ENGINEER'S LOGBOOK — PAGE 47</span>
-                <span class="font-mono text-xs text-stone-600">ROOM B // MORNING INSPECTION</span>
+            <div class="lined-paper border-2 border-stone-700 p-6 pl-12 rounded-sm shadow-xl">
+              <div class="flex items-center justify-between border-b border-stone-400 pb-2 mb-3">
+                <span class="font-typewriter text-xs font-bold text-crimson uppercase">CHIEF SOUND ENGINEER LOGBOOK</span>
+                <span class="font-typewriter text-xs text-stone-700">SHIFT: NIGHT</span>
               </div>
-              <div class="font-tiro text-base sm:text-lg text-stone-900 space-y-2">
-                <p>সকালে কনসোল চেক করতে গিয়ে দেখি ২-ইঞ্চি অ্যানালগ মাস্টার রিল এবং ব্যাকআপ ড্যাট (DAT) পুরোপুরি ওভাররাইট করে মুছে ফেলা হয়েছে।</p>
-                <p>১. এই ওভাররাইড কোনো সাধারণ শর্টকাটে করা হয়নি—কনসোলের ব্যাক-প্যানেলে একটি <strong>কাস্টম অ্যানালগ-টু-ডিজিটাল প্যাচ কেবল</strong> লাগানো হয়েছিল। অ্যাকোস্টিক ও ইলেকট্রনিক হাইব্রিড রাউটিংয়ে চরম দক্ষতা না থাকলে এটি করা অসম্ভব।</p>
-                <p>২. মিক্সিং ফ্যাডারের ঠিক পাশেই একটি <strong>বাঁ-হাতি গিটারিস্টের ব্যবহৃত ক্ষয়ে যাওয়া গিটার পিক</strong> এবং কাঠের ডেস্কে একটি <strong>ক্যাপো (Capo)-র টাটকা আঁচড়ের দাগ</strong> পাওয়া গেছে।</p>
-                <p>৩. বুথের মাইক প্রি-অ্যাম্পের গেইন ভোর ৩:০৫ পর্যন্ত খোলা ছিল।</p>
+              <div class="font-bengali text-sm sm:text-base text-stone-900 space-y-2">
+                <p>১. সকালে স্টুডিও খুলে দেখি ২-ইঞ্চি মাস্টার রিলের প্রধান ভোকাল ও রিদম ট্র্যাকটি সম্পূর্ণ মুছে ফেলা হয়েছে।</p>
+                <p>২. সাধারণ কোনো ভিজিটর এই কাজ করতে পারবে না—অপরাধী একটি <strong>কাস্টম অ্যানালগ-টু-ডিজিটাল প্যাচ কেবল</strong> ব্যবহার করে অ্যানালগ কনসোল ওভাররাইড করেছে।</p>
+                <p>৩. কনসোল বোর্ডের ঠিক নিচে মেঝেতে একটি <strong>বাঁ-হাতি (Left-handed) অ্যাকোস্টিক গিটার পিক</strong> এবং <strong>ক্যাপো (Capo)-র ঘষা দাগ</strong> পাওয়া গেছে।</p>
               </div>
             </div>
           `,
         },
         {
           id: 'EV-05',
-          code: 'UTILITY LOG',
           title: 'বিদ্যুৎ ও এসি বিলের রসিদ',
-          subtitle: 'Studio Room B Power Load & Phantom Power Telemetry',
-          tag: 'THERMAL SLIP',
-          accent: 'stone',
-          summary:
-            'স্টুডিও রুম-বি-র এসি এবং ৪৮ ভোল্ট ফ্যান্টম পাওয়ার রাত ০৩:০৫ AM পর্যন্ত চালু ছিল, যদিও অপরাধী রাত ০১:৩০ AM-এ বেরিয়ে যাওয়ার দাবি করে।',
+          subtitle: 'Automated Power & HVAC Meter Printout',
+          tag: 'METER LOG',
+          summary: 'স্টুডিও রুম-বি-র এয়ার কন্ডিশনার ও ফ্যান্টম পাওয়ার রাত ০৩:০৫ AM পর্যন্ত চালু থাকার ডিজিটাল প্রমাণ।',
           renderContent: () => `
-            <div class="flex justify-center py-2">
-              <div class="thermal-paper w-full max-w-md p-6 font-mono text-xs text-stone-900 border border-stone-300">
-                <div class="text-center border-b border-dashed border-stone-500 pb-3 mb-3">
-                  <p class="font-bold text-sm tracking-wider">STUDIO 7 — SUB-METER PRINT</p>
-                  <p class="text-[10px] text-stone-600">TOLLYGUNGE, KOLKATA // ROOM B LOAD LOG</p>
-                </div>
-                <div class="space-y-1.5 border-b border-dashed border-stone-500 pb-3 mb-3">
-                  <div class="flex justify-between"><span>DATE:</span><span>26-11-2026</span></div>
-                  <div class="flex justify-between"><span>01:30 AM (CLAIMED EXIT):</span><span>LOAD ACTIVE</span></div>
-                  <div class="flex justify-between"><span>02:00 AM - 02:15 AM:</span><span>GEN SWITCHOVER</span></div>
-                  <div class="flex justify-between font-bold text-crimson"><span>ROOM B AC UNIT:</span><span>ON UNTIL 03:05 AM</span></div>
-                  <div class="flex justify-between font-bold text-crimson"><span>48V PHANTOM POWER:</span><span>ON UNTIL 03:05 AM</span></div>
-                  <div class="flex justify-between"><span>03:06 AM ONWARDS:</span><span>IDLE / STANDBY</span></div>
-                </div>
-                <p class="font-bengali text-xs text-stone-800 leading-relaxed">
-                  <strong>নোট:</strong> রাত ১:৩০টায় রুম খালি হয়ে গেলে এসি ও কনসোল ফ্যান্টম পাওয়ার ০৩:০৫ AM পর্যন্ত চালু থাকার কোনো প্রশ্নই ওঠে না। কেউ গভীর রাত পর্যন্ত রুম-বি-তে কাজ করছিল।
-                </p>
-                <div class="mt-4 text-center text-[10px] text-stone-500 tracking-widest">
-                  *** END OF THERMAL TELEMETRY ***
-                </div>
+            <div class="thermal-paper max-w-md mx-auto p-6 rounded-sm font-typewriter text-xs sm:text-sm text-stone-900">
+              <div class="text-center border-b border-dashed border-stone-500 pb-3 mb-3">
+                <p class="font-bold text-base">STUDIO 7 — SUB-METER LOG</p>
+                <p class="text-[11px] text-stone-600">TOLLYGUNGE, CALCUTTA // ROOM-B HVAC &amp; CONSOLE</p>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between"><span>01:30 AM (Sign-Out):</span><span class="font-bold">STANDBY</span></div>
+                <div class="flex justify-between"><span>02:00 AM - 02:15 AM:</span><span class="font-bold">GEN SWITCHOVER</span></div>
+                <div class="flex justify-between text-crimson font-bold"><span>02:18 AM - 03:05 AM:</span><span>ROOM-B AC + 48V PHANTOM ON</span></div>
+                <div class="flex justify-between"><span>03:05 AM ONWARDS:</span><span class="font-bold">POWER CUT OFF</span></div>
+              </div>
+              <div class="border-t border-dashed border-stone-500 mt-4 pt-3 font-bengali text-xs text-stone-800">
+                <strong>বিশ্লেষণ:</strong> রাত ১:৩০টায় সবাই চলে যাওয়ার দাবি করলেও, ঠিক <strong>০৩:০৫ AM</strong> পর্যন্ত স্টুডিও রুম-বি-র এসি ও মাইক্রোফোনের ফ্যান্টম পাওয়ার চালু ছিল।
               </div>
             </div>
           `,
         },
         {
           id: 'EV-06',
-          code: 'AUDIO CONSOLE',
           title: 'অ্যানালগ রিল-টু-রিল অডিও কনসোল',
-          subtitle: 'Interactive Reel-to-Reel Player (3 Master & Leak Tracks)',
-          tag: 'WEB AUDIO FORENSICS',
-          accent: 'amber',
+          subtitle: 'Lalbazar Audio Forensics Deck // 3 Seized Tapes',
+          tag: 'AUDIO CONSOLE',
           isAudioConsole: true,
-          summary:
-            'স্টুডিও ৭ থেকে উদ্ধার হওয়া ৩টি অ্যানালগ টেপ রিল। সরাসরি প্লে করে এবং ফ্রিকোয়েন্সি অ্যানালাইজার চালিয়ে গোপন অডিও সূত্র ও ভল্ট কোড বের করুন।',
+          summary: 'স্টুডিও ৭ থেকে জব্দ করা ৩টি অ্যানালগ রিল টেপ এবং স্পেকট্রাল ফ্রিকোয়েন্সি অ্যানালাইজার কনসোল।',
         },
         {
           id: 'EV-07',
-          code: 'TORN PAGE',
           title: 'অজ্ঞাতনামা নোটবুকের ছেঁড়া পাতা',
-          subtitle: 'Found Near Studio Room B Trash Bin — Handwritten Confession',
+          subtitle: 'Recovered From Studio Dustbin // Handwritten Note',
           tag: 'CONFESSION NOTE',
-          accent: 'crimson',
-          summary:
-            'মাস্টার ড্রাইভ মোছার আগে অ্যাকোস্টিক গিটার ৪৩২ হার্জে টিউন করার স্বীকারোক্তি এবং ক্রেডিট ছাড়া গান রিলিজ হতে না দেওয়ার প্রতিজ্ঞা।',
+          summary: 'ডাস্টবিন থেকে উদ্ধার করা একটি ছেঁড়া কাগজ, যেখানে ৪৩২ হার্জ টিউনিং ও ক্রেডিট বঞ্চনার ক্ষোভের কথা লেখা আছে।',
           renderContent: () => `
-            <div class="py-4 px-2 flex justify-center">
-              <div class="lined-paper -rotate-1 max-w-xl w-full p-6 sm:p-8 pl-12 sm:pl-14 rounded-sm border border-stone-400 shadow-2xl relative">
-                <div class="absolute -top-3 right-6 bg-ambervu/80 text-stone-950 font-mono text-[10px] font-bold px-2.5 py-0.5 uppercase shadow">
-                  RECOVERED FRAGMENT // ROOM B
-                </div>
-                <p class="font-tiro italic text-lg sm:text-xl text-stone-900 leading-relaxed">
-                  “আমার মাসের পর মাস রাত জাগা সুর, অথচ ওরা চুক্তি থেকে আমার নামটাই মুছে দেবে? শেষবার আমার অ্যাকোস্টিক গিটারটা প্রিয় <strong>৪৩২ হার্জে (432 Hz)</strong> টিউন করে সুরটাকে বিদায় জানালাম। কনসোল ওভাররাইড করে মাস্টার ড্রাইভটা আজ রাতেই মুছে দেব—আমার ক্রেডিট ছাড়া এই অপ্রকাশিত গান কোনোদিন রিলিজ হতে দেব না...”
-                </p>
-                <div class="mt-6 flex justify-between items-center font-mono text-[11px] text-stone-600">
-                  <span>INK: BLUE FOUNTAIN PEN</span>
-                  <span class="text-crimson font-bold">NO SIGNATURE</span>
-                </div>
+            <div class="lined-paper border-2 border-stone-700 p-6 pl-12 rounded-sm -rotate-1 shadow-2xl max-w-xl mx-auto">
+              <div class="flex justify-between items-center mb-2">
+                <span class="font-typewriter text-[11px] text-crimson font-bold uppercase">RECOVERED FRAGMENT // EXHIBIT 07</span>
+                <span class="ink-stamp text-crimson text-[10px]">HANDWRITING MATCH PENDING</span>
               </div>
+              <p class="font-signature text-xl sm:text-2xl text-stone-900 leading-relaxed mt-2">
+                “রাতজাগা সুর আর অ্যাকোস্টিক অ্যারেঞ্জমেন্ট আমার, অথচ চুক্তিপত্রে আমার নামটাই বাদ দেওয়া হচ্ছে! যাওয়ার আগে গিটারটা <strong>৪৩২ হার্জ (432 Hz)</strong>-এ টিউন করে শেষ সুরটা বাজালাম—আমার প্রাপ্য সম্মান ছাড়া এই মাস্টার টেপ আর কোনোদিন রিলিজ হবে না...”
+              </p>
             </div>
           `,
         },
       ];
 
-      /* ------------------------------------------------------------------- */
-      /* SUSPECTS DATABASE (8 DISTINCT PROFILES)                             */
-      /* ------------------------------------------------------------------- */
       const SUSPECTS = [
         {
           id: 'SUS-01',
           name: 'রাহুল মিত্র',
           role: 'স্টুডিও মালিকের ছেলে',
-          alibi: 'রাত ১:০০টায় পার্ক স্ট্রিটের এক ব্যক্তিগত পার্টিতে ছিলেন — অতিথি তালিকা ও ছবিতে প্রমাণিত।',
-          motive: 'পুরনো স্টুডিওটি বিক্রি করে প্রোমোটারের হাতে তুলে দিতে চান।',
-          notes: 'অ্যানালগ অডিও কনসোল বা হাইব্রিড প্যাচ রাউটিং সম্পর্কে কোনো কারিগরি জ্ঞান নেই।',
           status: 'ALIBI VERIFIED',
-          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
+          statusColor: 'text-emerald-400 border-emerald-700 bg-emerald-950/30',
+          alibi: 'রাত ১২:৩০টা থেকে ভোর ৪:০০টা পর্যন্ত পার্ক স্ট্রিটের একটি ক্লাবের প্রাইভেট পার্টিতে উপস্থিত ছিলেন (সিসিটিভি ও একাধিক সাক্ষী দ্বারা প্রমাণিত)।',
+          motive: 'লোকসানে চলা স্টুডিও ৭ বিক্রি করে প্রোমোটারকে দিতে চান।',
+          notes: 'অ্যানালগ সাউন্ড ইঞ্জিনিয়ারিং বা গিটার টিউনিং সম্পর্কে কোনো কারিগরি জ্ঞান নেই।',
         },
         {
           id: 'SUS-02',
           name: 'ডাঃ অন্তর্জিতা মাইতি',
           role: 'ভয়েস থেরাপিস্ট ও অ্যাকোস্টিক কনসালট্যান্ট',
-          alibi: 'গায়িকার গলার চিকিৎসার জন্য সন্ধ্যেয় এসেছিলেন, কিন্তু রাত ৯:০০টায় স্টুডিও ছেড়ে বাড়ি ফিরে যান (গেট লগ ও সিসিটিভি প্রমাণিত)।',
-          motive: 'মাস্টার ট্র্যাক নষ্ট করার কোনো ব্যক্তিগত বা আর্থিক স্বার্থ নেই।',
-          notes: 'রাত ৯টার পর স্টুডিও চত্বরে ফেরেননি।',
           status: 'CLEARED',
-          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
+          statusColor: 'text-emerald-400 border-emerald-700 bg-emerald-950/30',
+          alibi: 'গায়িকার গলার চিকিৎসার জন্য সন্ধ্যে ৭:০০টায় এসেছিলেন এবং রাত ৯:০০টায় স্টুডিও ছেড়ে বাড়ি ফিরে যান।',
+          motive: 'কোনো প্রত্যক্ষ আর্থিক বিরোধ পাওয়া যায়নি।',
+          notes: 'রাত ৯:০০টার পর স্টুডিও চত্বরে তাঁর উপস্থিতির কোনো প্রমাণ নেই।',
         },
         {
           id: 'SUS-03',
           name: 'অনিমেষ বসু',
           role: 'রেকর্ড লেবেল ম্যানেজার (সুরধ্বনি রেকর্ডস)',
-          alibi: 'রাত ১১:৩০টায় অফিস থেকে বাড়ি ফিরে যান বলে দাবি।',
-          motive: 'তিনি গানটি যত দ্রুত সম্ভব বাজারে রিলিজ করতে চাইছিলেন—মাস্টার ট্র্যাক মুছে ফেললে তাঁর লেবেলেরই সবচেয়ে বড় আর্থিক ক্ষতি।',
-          notes: 'অ্যালবামের ₹১,০০,০০০ সেশন-ফি ও ক্রেডিট চুক্তি চূড়ান্ত করার দায়িত্বে ছিলেন।',
-          status: 'LOW MOTIVE',
-          statusColor: 'text-amber-300 border-amber-700/60 bg-amber-950/30',
+          status: 'PERSON OF INTEREST',
+          statusColor: 'text-amber-400 border-amber-700 bg-amber-950/30',
+          alibi: 'রাত ১১:৩০টায় চুক্তিপত্রের খসড়া ভল্টে রেখে নিজের গাড়িতে সল্টলেকের বাড়িতে ফিরে যান।',
+          motive: 'বাজেট বাঁচাতে চুক্তিপত্রে কেবল সৌম্যজিৎ শেখর সাহাকেই ₹১,০০,০০০ টাকা ও ক্রেডিট দেওয়ার সিদ্ধান্ত নিয়েছিলেন।',
+          notes: 'তিনি অ্যালবামটি দ্রুত রিলিজ করতে চাইছিলেন, তাই মাস্টার টেপ নষ্ট করে তাঁর নিজেরই বড় ব্যবসায়িক ক্ষতি হয়েছে।',
         },
         {
           id: 'SUS-04',
           name: 'সৌম্যজিৎ শেখর সাহা',
-          role: 'কো-প্রডিউসার ও লিড সেশন মিউজিশিয়ান',
-          alibi: 'রাত ১:৩০টায় মেইন গেটে সাইন-আউট করে বাড়ি ফিরে যান — আবাসনের নাইট গার্ড রাত ২:১০-এ তাঁকে বাড়িতে ঢুকতে দেখেছেন।',
-          motive: 'গোপন ভল্টের চুক্তি অনুযায়ী তিনিই অ্যালবামের সম্পূর্ণ ₹১,০০,০০০ সেশন-ফি ও প্রধান ক্রেডিট পাচ্ছেন, তাই তাঁর ট্র্যাক মোছার কোনো কারণ নেই।',
-          notes: 'ডান-হাতি মিউজিশিয়ান; স্ট্যান্ডার্ড ৪৪০ হার্জ টিউনিং ব্যবহার করেন।',
-          status: 'BENEFICIARY',
-          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
+          role: 'কো-প্রডিউসার ও লিড সেশন গিটারিস্ট',
+          status: 'ALIBI CHECKED',
+          statusColor: 'text-sky-400 border-sky-700 bg-sky-950/30',
+          alibi: 'রাত ১:৩০টায় মেইন গেটে সাইন করে বেরিয়ে সোজা টালিগঞ্জ মেট্রো সংলগ্ন ফ্ল্যাটে ফিরে যান।',
+          motive: 'চূড়ান্ত চুক্তিপত্রে তাঁকেই অ্যালবামের প্রধান প্রযোজক হিসেবে ₹১,০০,০০০ (এক লক্ষ টাকা) সেশন-ফি ও ক্রেডিট দেওয়া হচ্ছিল।',
+          notes: 'তিনি ডান-হাতি গিটারিস্ট এবং চুক্তিতে সম্পূর্ণ টাকা ও সম্মান পাওয়ায় তাঁর টেপ মোছার কোনো উদ্দেশ্য ছিল না।',
         },
         {
           id: 'SUS-05',
           name: 'হরিপদ দা',
-          role: 'নাইট সিকিউরিটি গার্ড',
-          alibi: 'রাত ২:০০টায় জেনারেটর সুইচওভারের সময় মেইন গেট ও জেনারেটর রুমে ছিলেন।',
-          motive: 'স্টুডিওর প্রতি অনুগত; মাস্টার টেপ মোছার কোনো উদ্দেশ্য বা প্রযুক্তিগত দক্ষতা নেই।',
-          notes: 'জেনারেটর ব্ল্যাকআউট ও রাত ১:৩০ AM-এর সাইন-আউটের প্রত্যক্ষদর্শী।',
-          status: 'WITNESS',
+          role: 'নাইট গার্ড (স্টুডিও ৭)',
+          status: 'ON DUTY',
           statusColor: 'text-stone-300 border-stone-600 bg-stone-900',
+          alibi: 'পুরো রাত মেইন গেট ও জেনারেটর রুমে ডিউটিতে ছিলেন।',
+          motive: 'কোনো ব্যক্তিগত বা আর্থিক স্বার্থ নেই।',
+          notes: 'রাত ২:০০টার জেনারেটর সুইচওভারের সময় ১৫ মিনিট মেইন করিডোর থেকে দূরে জেনারেটর ঘরে ছিলেন।',
         },
         {
           id: 'SUS-06',
           name: 'দেবযানী সেনগুপ্ত',
           role: 'লিড ভোকালিস্ট ও গীতিকার',
-          alibi: 'রাত ১১:০০টায় নিজের ভোকাল টেক শেষ করে স্টুডিও থেকে বেরিয়ে যান এবং ফোনে লাইভ রেডিও ইন্টারভিউয়ে যুক্ত ছিলেন।',
-          motive: 'এটি তাঁর ক্যারিয়ারের প্রথম বড় অ্যালবাম রিলিজ; মাস্টার টেপ মুছে গেলে তাঁরই সবচেয়ে বড় ক্ষতি।',
-          notes: 'গিটার বাজাতে বা স্টুডিও কনসোল অপারেট করতে জানেন না।',
-          status: 'ALIBI VERIFIED',
-          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
+          status: 'CLEARED',
+          statusColor: 'text-emerald-400 border-emerald-700 bg-emerald-950/30',
+          alibi: 'রাত ১০:৩০টায় ভোকাল রেকর্ডিং শেষ করে নিজের ড্রাইভারসহ বালিগঞ্জের বাড়িতে ফিরে যান।',
+          motive: 'এই অ্যালবামটিই তাঁর ক্যারিয়ারের সবচেয়ে বড় ব্রেক—মাস্টার ট্র্যাক মুছে গেলে তাঁরই সবচেয়ে বড় ক্ষতি।',
+          notes: 'অ্যানালগ কনসোল ওভাররাইড বা প্যাচ কেবল সম্পর্কে কোনো ধারণা নেই।',
         },
         {
           id: 'SUS-07',
           name: 'ঋত্বিক চ্যাটার্জী',
-          role: 'অ্যাকোস্টিক রিদম গিটারিস্ট ও সাউন্ড অ্যারেঞ্জার (বাঁ-হাতি)',
-          alibi: 'সৌম্যজিতের সাথে রাত ১:৩০টায় মেইন গেটে সই করে বেরিয়ে যাওয়ার ভান করেন, কিন্তু ১:৩০টার পর তাঁর অবস্থানের কোনো প্রমাণ নেই।',
-          motive: 'অ্যালবামের মূল অ্যাকোস্টিক রিদম ও সুর সাজানো সত্ত্বেও গোপন চুক্তিতে তাঁকে বাদ দিয়ে পুরো ₹১,০০,০০০ সেশন-ফি সৌম্যজিৎকে দেওয়া হচ্ছিল।',
-          notes: 'বাঁ-হাতি গিটারিস্ট; ৪৩২ হার্জ টিউনিং ও অ্যানালগ-টু-ডিজিটাল হাইব্রিড প্যাচ রাউটিংয়ে বিশেষজ্ঞ।',
-          status: 'UNDER SCRUTINY',
-          statusColor: 'text-red-400 border-crimson bg-crimson/15',
+          role: 'অ্যাকোস্টিক রিদম গিটারিস্ট ও সাউন্ড অ্যারেঞ্জার',
+          status: 'PRIME SUSPECT',
+          statusColor: 'text-red-400 border-crimson bg-crimson/20',
+          alibi: 'দাবি করেন রাত ১:৩০টায় সৌম্যজিতের সাথে মেইন গেট দিয়ে বেরিয়ে বাড়ি চলে গেছেন, কিন্তু তাঁর বাড়ি ফেরার কোনো স্বাধীন সাক্ষী নেই।',
+          motive: 'অ্যালবামের মূল অ্যাকোস্টিক রিদম ও সুর সাজানো সত্ত্বেও গোপন চুক্তিতে তাঁকে ₹১,০০,০০০ সেশন-ফি ও ক্রেডিট থেকে সম্পূর্ণ বাদ দেওয়া হয়েছিল।',
+          notes: 'তিনি একজন দক্ষ বাঁ-হাতি (Left-handed) অ্যাকোস্টিক গিটারিস্ট, অ্যানালগ-ডিজিটাল হাইব্রিড রাউটিংয়ে পারদর্শী এবং প্রায়ই ৪৩২ হার্জ টিউনিং ব্যবহার করেন।',
         },
         {
           id: 'SUS-08',
           name: 'তন্ময় গাঙ্গুলী',
           role: 'তবলা ও অ্যাকোস্টিক পারকাশনিস্ট',
-          alibi: 'রাত ১১:০০টায় দেবযানীর সাথে স্টুডিও ছেড়ে হাওড়া স্টেশন থেকে রাত ১১:৪৫-এর ট্রেন ধরেন (টিকিট ও সহযাত্রীদের দ্বারা প্রমাণিত)।',
-          motive: 'তাঁর পারকাশন সেশনের পারিশ্রমিক আগেই মিটিয়ে দেওয়া হয়েছিল।',
-          notes: 'অ্যানালগ কনসোল বা ইলেকট্রনিক প্যাচ কেবল সম্পর্কে কোনো ধারণা নেই।',
           status: 'CLEARED',
-          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
+          statusColor: 'text-emerald-400 border-emerald-700 bg-emerald-950/30',
+          alibi: 'রাত ১১:০০টায় স্টুডিও ছেড়ে হাওড়া স্টেশন থেকে শেষ লোকাল ট্রেন ধরে বাড়ি ফেরেন (টিকিট ও সহযাত্রীর সাক্ষ্য রয়েছে)।',
+          motive: 'তাঁর পারিশ্রমিক আগেই মিটিয়ে দেওয়া হয়েছিল।',
+          notes: 'গিটার বাজান না এবং রাত ১১টার পর স্টুডিওতে ছিলেন না।',
         },
       ];
 
       /* ------------------------------------------------------------------- */
-      /* AUDIO TRACK METADATA (3 REAL WEB AUDIO SYNTHESIZED TRACKS)          */
+      /* WEB AUDIO API SYNTHESIS ENGINE (iOS & MOBILE COMPATIBLE)            */
       /* ------------------------------------------------------------------- */
-      const AUDIO_TRACKS = [
-        {
-          id: 'track-1',
-          filename: 'Master_Demo_Snippet.wav',
-          timestamp: '02:14 AM BACKUP',
-          duration: 10.5,
-          description:
-            'গভীর রাতে অটো-ব্যাকআপে ধরা পড়া সুরের অংশ। স্পষ্ট অ্যাকোস্টিক পিয়ানো কর্ড প্রোগ্রেশন ও ন্যাচারাল রুম রেজোন্যান্স প্রমাণ করে ট্র্যাকটি ডিজিটাল MIDI নয়, লাইভ অ্যাকোস্টিক সেটআপে রেকর্ড করা হয়েছিল।',
-        },
-        {
-          id: 'track-2',
-          filename: 'Corrupted_Tape_440Hz.wav',
-          timestamp: 'HIDDEN FREQ CLUE',
-          duration: 11.5,
-          description:
-            'অ্যানালগ টেপে অস্বাভাবিক ফ্রিকোয়েন্সি ধরা পড়েছে। সঠিক বিশ্লেষণের জন্য “Frequency Analyzer” চালু করে অডিওটি পরীক্ষা করুন।',
-        },
-        {
-          id: 'track-3',
-          filename: 'Studio_Door_Mic_Leak.wav',
-          timestamp: '03:05 AM AMBIENT LEAK',
-          duration: 10.5,
-          description:
-            'স্টুডিও রুম-বি-র দরজার লিকড অডিও। মনোযোগ দিয়ে শুনে শব্দগুলো শনাক্ত করুন।',
-        },
-      ];
+      let audioUnlocked = false;
 
-      /* ------------------------------------------------------------------- */
-      /* WEB AUDIO API SYNTHESIS ENGINE                                      */
-      /* ------------------------------------------------------------------- */
-      function ensureAudioContext() {
+      async function ensureAudioContext() {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return null;
         if (!state.audioCtx) {
           state.audioCtx = new AudioCtx();
           state.analyser = state.audioCtx.createAnalyser();
           state.analyser.fftSize = 256;
           state.masterGain = state.audioCtx.createGain();
-          state.masterGain.gain.value = 0.72;
+          state.masterGain.gain.value = 0.78;
           state.masterGain.connect(state.analyser);
           state.analyser.connect(state.audioCtx.destination);
         }
         if (state.audioCtx.state === 'suspended') {
-          state.audioCtx.resume();
+          await state.audioCtx.resume();
         }
+        // iOS Safari hardware audio unlock via 1-sample silent buffer
+        if (!audioUnlocked && state.audioCtx) {
+          try {
+            const silentBuf = state.audioCtx.createBuffer(1, 1, 22050);
+            const src = state.audioCtx.createBufferSource();
+            src.buffer = silentBuf;
+            src.connect(state.audioCtx.destination);
+            src.start(0);
+            audioUnlocked = true;
+          } catch (e) {}
+        }
+        return state.audioCtx;
       }
 
       // Subtle UI feedback beep on login/vault unlock
-      function playSystemTone(freq = 520, duration = 0.12, type = 'sine') {
+      async function playSystemTone(freq = 520, duration = 0.12, type = 'sine') {
         try {
-          ensureAudioContext();
-          const ctx = state.audioCtx;
+          const ctx = await ensureAudioContext();
+          if (!ctx) return;
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = type;
@@ -1145,25 +1090,42 @@
         }
       }
 
-      // Tactile Vibration Haptics Helper
-      function triggerHaptic(pattern = 15) {
+      // Tactile Vibration Haptics Helper (Android Vibration + iOS Sub-Bass Haptic Thump Fallback)
+      function triggerHaptic(pattern = 18) {
+        let vibrated = false;
         try {
-          if (navigator && typeof navigator.vibrate === 'function') {
-            navigator.vibrate(pattern);
+          if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+            vibrated = navigator.vibrate(pattern);
           }
-        } catch (err) {
-          // Ignore unsupported environments
+        } catch (err) {}
+
+        // iOS Safari does not expose navigator.vibrate; provide tactile low-end thump if context is active
+        if (!vibrated && state.audioCtx && state.audioCtx.state === 'running') {
+          try {
+            const ctx = state.audioCtx;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(92, now);
+            osc.frequency.exponentialRampToValueAtTime(38, now + 0.032);
+            g.gain.setValueAtTime(0.14, now);
+            g.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+            osc.connect(g);
+            g.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.038);
+          } catch (e) {}
         }
       }
 
       // Crisp 1990s Analog Console / Typewriter Mechanical Click Sound
-      function playMechanicalClick(pitch = 950) {
+      async function playMechanicalClick(pitch = 950) {
         try {
-          ensureAudioContext();
-          const ctx = state.audioCtx;
+          const ctx = await ensureAudioContext();
+          if (!ctx) return;
           const now = ctx.currentTime;
 
-          // Short filtered noise burst + crisp transient click
           const bufferSize = Math.floor(ctx.sampleRate * 0.022);
           const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
           const data = buffer.getChannelData(0);
@@ -1187,17 +1149,15 @@
           filter.connect(gain);
           gain.connect(ctx.destination);
           noise.start(now);
-        } catch (err) {
-          // Ignore gesture restrictions
-        }
+        } catch (err) {}
       }
 
       // Mild 1990s Kolkata Detective Noir Background Score (Warm D-Minor Pad + Soft Electric Piano Motif)
-      function startDetectiveAmbient() {
+      async function startDetectiveAmbient() {
         if (!state.ambientEnabled || state.ambientRunning) return;
         try {
-          ensureAudioContext();
-          const ctx = state.audioCtx;
+          const ctx = await ensureAudioContext();
+          if (!ctx) return;
           state.ambientRunning = true;
 
           const ambGain = ctx.createGain();
@@ -1206,13 +1166,11 @@
           ambGain.connect(ctx.destination);
           state.ambientGain = ambGain;
 
-          // Warm low-pass filter for cozy vintage noir atmosphere
           const lpFilter = ctx.createBiquadFilter();
           lpFilter.type = 'lowpass';
           lpFilter.frequency.setValueAtTime(480, ctx.currentTime);
           lpFilter.connect(ambGain);
 
-          // Subtle continuous D2 + A2 warm analog drone
           [73.42, 110.0].forEach((freq, i) => {
             const osc = ctx.createOscillator();
             const g = ctx.createGain();
@@ -1225,7 +1183,6 @@
             state.ambientNodes.push(osc);
           });
 
-          // Gentle mysterious detective motif loop (Dm9: D3, F3, A3, E4, C4)
           const motif = [
             { f: 146.83, d: 2.6 }, // D3
             { f: 174.61, d: 2.4 }, // F3
@@ -1281,7 +1238,6 @@
         state.ambientGain = null;
       }
 
-      // Smoothly ducks ambient tone when forensic audio tracks play
       function setAmbientDucking(duck) {
         if (!state.ambientGain || !state.audioCtx) return;
         const now = state.audioCtx.currentTime;
@@ -1302,13 +1258,108 @@
         }
       }
 
+      // Analog Tape Hiss Generator
+      function createTapeHiss(ctx, duration, level = 0.035) {
+        const bufferSize = Math.floor(ctx.sampleRate * duration);
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const bandpass = ctx.createBiquadFilter();
+        bandpass.type = 'bandpass';
+        bandpass.frequency.setValueAtTime(2400, ctx.currentTime);
+        bandpass.Q.setValueAtTime(0.8, ctx.currentTime);
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(level, ctx.currentTime);
+
+        noise.connect(bandpass);
+        bandpass.connect(gain);
+        gain.connect(state.masterGain);
+        noise.start(ctx.currentTime + 0.02);
+        noise.stop(ctx.currentTime + duration);
+        state.activeNodes.push(noise);
+      }
+
+      // Track 01: Master Demo Snippet (02:14 AM) — Acoustic Grand Piano Progression in A Minor (A - C - E - G)
+      function synthesizeTrack1() {
+        const ctx = state.audioCtx;
+        const now = ctx.currentTime + 0.05;
+        createTapeHiss(ctx, 10.5, 0.03);
+
+        const chords = [
+          { time: 0.2, dur: 2.3, notes: [220.0, 261.63, 329.63, 440.0] },
+          { time: 2.7, dur: 2.3, notes: [174.61, 220.0, 261.63, 329.63] },
+          { time: 5.2, dur: 2.3, notes: [130.81, 261.63, 329.63, 392.0] },
+          { time: 7.7, dur: 2.5, notes: [196.0, 246.94, 293.66, 392.0] },
+        ];
+
+        chords.forEach((chord) => {
+          chord.notes.forEach((freq, idx) => {
+            const t = now + chord.time + idx * 0.07;
+            const osc = ctx.createOscillator();
+            const overtone = ctx.createOscillator();
+            const lp = ctx.createBiquadFilter();
+            const gain = ctx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, t);
+
+            overtone.type = 'sine';
+            overtone.frequency.setValueAtTime(freq * 2, t);
+
+            lp.type = 'lowpass';
+            lp.frequency.setValueAtTime(1650, t);
+            lp.frequency.exponentialRampToValueAtTime(340, t + chord.dur);
+
+            gain.gain.setValueAtTime(0.001, t);
+            gain.gain.linearRampToValueAtTime(0.095, t + 0.025);
+            gain.gain.exponentialRampToValueAtTime(0.0008, t + chord.dur);
+
+            const overGain = ctx.createGain();
+            overGain.gain.setValueAtTime(0.025, t);
+            overGain.gain.exponentialRampToValueAtTime(0.0005, t + chord.dur * 0.6);
+
+            osc.connect(lp);
+            overtone.connect(overGain);
+            overGain.connect(lp);
+            lp.connect(gain);
+            gain.connect(state.masterGain);
+
+            osc.start(t);
+            overtone.start(t);
+            osc.stop(t + chord.dur + 0.05);
+            overtone.stop(t + chord.dur + 0.05);
+            state.activeNodes.push(osc, overtone);
+          });
+        });
+
+        for (let beat = 0; beat < 16; beat++) {
+          const bt = now + 0.2 + beat * 0.625;
+          const pulseOsc = ctx.createOscillator();
+          const pulseGain = ctx.createGain();
+          pulseOsc.type = 'sine';
+          pulseOsc.frequency.setValueAtTime(beat % 4 === 0 ? 110 : 75, bt);
+          pulseGain.gain.setValueAtTime(0.06, bt);
+          pulseGain.gain.exponentialRampToValueAtTime(0.001, bt + 0.07);
+          pulseOsc.connect(pulseGain);
+          pulseGain.connect(state.masterGain);
+          pulseOsc.start(bt);
+          pulseOsc.stop(bt + 0.08);
+          state.activeNodes.push(pulseOsc);
+        }
+      }
+
       // Track 02: Corrupted Tape 440Hz Hum + 4 Distinct Chime/Morse Pulses encoding 4 - 3 - 2 - 0
       function synthesizeTrack2() {
         const ctx = state.audioCtx;
         const now = ctx.currentTime + 0.05;
         createTapeHiss(ctx, 11.5, 0.035);
 
-        // Steady 440Hz tape calibration hum (low level) + 60Hz analog floor
         [440, 60].forEach((freq, idx) => {
           const hum = ctx.createOscillator();
           const gain = ctx.createGain();
@@ -1322,11 +1373,6 @@
           state.activeNodes.push(hum);
         });
 
-        // 4 Distinct Pulse Groups representing 4 - 3 - 2 - 0
-        // Group 1 (Digit 4): 4 quick high chimes at 1.0s
-        // Group 2 (Digit 3): 3 clear chimes at 3.8s
-        // Group 3 (Digit 2): 2 clear chimes at 6.3s
-        // Group 4 (Digit 0): 1 long low resonant null-tone at 8.5s
         const pulseGroups = [
           { digit: '4', start: 1.0, count: 4, freq: 880, dur: 0.16, gap: 0.28 },
           { digit: '3', start: 3.6, count: 3, freq: 784, dur: 0.16, gap: 0.30 },
@@ -1361,7 +1407,6 @@
         const now = ctx.currentTime + 0.05;
         createTapeHiss(ctx, 10.5, 0.042);
 
-        // Low AC room drone (108 Hz subtle hum)
         const acHum = ctx.createOscillator();
         const acGain = ctx.createGain();
         acHum.type = 'sine';
@@ -1373,7 +1418,6 @@
         acHum.stop(now + 10.4);
         state.activeNodes.push(acHum);
 
-        // Footsteps on wooden studio floor (at 1.1s, 1.85s, 2.6s, 3.35s)
         [1.1, 1.85, 2.6, 3.35].forEach((ft) => {
           const t = now + ft;
           const osc = ctx.createOscillator();
@@ -1390,7 +1434,6 @@
           state.activeNodes.push(osc);
         });
 
-        // Metallic ring tap against acoustic guitar body (at 4.7s & 4.95s)
         [4.7, 4.95].forEach((rt) => {
           const t = now + rt;
           const osc = ctx.createOscillator();
@@ -1406,7 +1449,6 @@
           state.activeNodes.push(osc);
         });
 
-        // Distinct 432 Hz Tuned Acoustic Guitar Pluck (A4=432Hz, E4=323.63Hz, A3=216Hz)
         const guitarNotes = [
           { f: 216.0, t: 5.8, d: 2.8 },
           { f: 323.63, t: 6.15, d: 2.6 },
@@ -1414,7 +1456,6 @@
         ];
         guitarNotes.forEach((gn) => {
           const t = now + gn.t;
-          // Sawtooth filtered rapidly to emulate plucked nylon/steel acoustic string
           const osc = ctx.createOscillator();
           const filter = ctx.createBiquadFilter();
           const gain = ctx.createGain();
@@ -1460,9 +1501,9 @@
         updateAudioConsoleUI();
       }
 
-      function playAudioTrack(trackId) {
+      async function playAudioTrack(trackId) {
         try {
-          ensureAudioContext();
+          await ensureAudioContext();
           stopCurrentAudio();
 
           const track = AUDIO_TRACKS.find((t) => t.id === trackId);
@@ -1520,7 +1561,6 @@
           const w = canvas.clientWidth;
           const h = canvas.clientHeight;
 
-          // Update progress bar
           const elapsed = (performance.now() - state.trackStartTime) / 1000;
           const pct = Math.min(100, (elapsed / state.trackDuration) * 100);
           const progBar = document.getElementById('audio-progress-bar');
@@ -1530,11 +1570,9 @@
             timeDisplay.textContent = `${elapsed.toFixed(1)}s / ${state.trackDuration.toFixed(1)}s`;
           }
 
-          // Background
           ctx.fillStyle = '#0B0A09';
           ctx.fillRect(0, 0, w, h);
 
-          // Studio Grid Lines
           ctx.strokeStyle = 'rgba(217, 119, 6, 0.12)';
           ctx.lineWidth = 1;
           for (let x = 0; x < w; x += 32) {
@@ -1551,7 +1589,6 @@
           }
 
           if (state.analyzerEnabled) {
-            // Frequency Spectrum Bars Mode
             state.analyser.getByteFrequencyData(dataArray);
             const barWidth = (w / bufferLength) * 2.1;
             let x = 0;
@@ -1563,7 +1600,6 @@
               x += barWidth;
             }
 
-            // Live Frequency Decode Banner for Track 02
             if (state.currentTrackId === 'track-2') {
               let revealed = '';
               if (elapsed >= 1.0) revealed += '4';
@@ -1584,7 +1620,6 @@
               );
             }
           } else {
-            // Analog Oscilloscope Waveform Mode
             state.analyser.getByteTimeDomainData(dataArray);
             ctx.lineWidth = 2;
             ctx.strokeStyle = '#F59E0B';
@@ -1660,7 +1695,6 @@
           }
         }
 
-        // Highlight active track buttons
         document.querySelectorAll('.track-play-btn').forEach((btn) => {
           const isThisPlaying = state.isPlaying && btn.dataset.trackId === state.currentTrackId;
           btn.textContent = isThisPlaying ? '■ STOP' : '▶ PLAY';
@@ -1669,7 +1703,6 @@
             : 'track-play-btn shrink-0 bg-ambervu hover:bg-amber-500 text-stone-950 font-mono font-bold text-xs px-3.5 py-2 rounded-sm cursor-pointer transition-colors';
         });
 
-        // Show decoded vault code clearly when Frequency Analyzer is toggled ON for Track 02
         if (decodeBox) {
           if (state.analyzerEnabled && state.currentTrackId === 'track-2') {
             decodeBox.classList.remove('hidden');
@@ -1680,7 +1713,7 @@
       }
 
       /* ------------------------------------------------------------------- */
-      /* RENDER INTERACTIVE REEL-TO-REEL AUDIO CONSOLE (EV-01)               */
+      /* RENDER INTERACTIVE REEL-TO-REEL AUDIO CONSOLE (EV-06)               */
       /* ------------------------------------------------------------------- */
       function renderAudioConsoleHTML() {
         const reelSVG = `
@@ -1804,6 +1837,7 @@
       /* ------------------------------------------------------------------- */
       function renderEvidenceGrid() {
         const grid = document.getElementById('evidence-grid');
+        if (!grid) return;
         grid.innerHTML = EVIDENCE_FILES.map((ev) => {
           const isExamined = state.examinedFiles.has(ev.id);
           const isAudio = ev.isAudioConsole;
@@ -1875,7 +1909,6 @@
           `;
         }).join('');
 
-        // Attach click listeners
         document.querySelectorAll('.evidence-card').forEach((card) => {
           card.addEventListener('click', () => {
             playMechanicalClick(820);
@@ -1887,6 +1920,7 @@
 
       function renderSuspectsGrid() {
         const grid = document.getElementById('suspects-grid');
+        if (!grid) return;
         grid.innerHTML = SUSPECTS.map(
           (sus) => `
           <article class="bg-console border-2 border-khaki/80 hover:border-ambervu/70 rounded-sm p-5 transition-colors flex flex-col justify-between shadow-lg">
@@ -2018,12 +2052,19 @@
       /* EVENT LISTENERS & INITIALIZATION                                    */
       /* ------------------------------------------------------------------- */
       window.addEventListener('DOMContentLoaded', () => {
+        // Unlock Web Audio immediately on first mobile touch/pointer gesture (critical for iOS Safari)
+        const unlockMobileAudio = () => {
+          ensureAudioContext();
+        };
+        document.addEventListener('touchstart', unlockMobileAudio, { passive: true, once: true });
+        document.addEventListener('pointerdown', unlockMobileAudio, { passive: true, once: true });
+
         // Global Tactile Button Click Sound & Micro-Haptics
         document.addEventListener('click', (e) => {
           const btn = e.target.closest('button, select');
           if (btn && !btn.classList.contains('vault-key')) {
             playMechanicalClick(980);
-            triggerHaptic(12);
+            triggerHaptic(18);
           }
         });
 
@@ -2160,7 +2201,6 @@
             triggerHaptic([40, 60, 40, 60, 90]);
             playSystemTone(659.25, 0.22);
 
-            // Update Header Status Badge
             const statusBadge = document.getElementById('case-status-badge');
             statusBadge.textContent = 'STATUS: SOLVED';
             statusBadge.className = 'ink-stamp text-emerald-400 bg-emerald-950/40 text-[11px] px-2.5 py-1';
@@ -2190,7 +2230,7 @@
                   INCORRECT DEDUCTION — RE-EXAMINE AUDIO LOGS
                 </div>
                 <p class="font-bengali text-sm text-red-200 leading-relaxed">
-                  আপনার দাখিল করা তথ্যগুলোর মধ্যে অন্তত একটি সূত্র প্রমাণপত্রের সঙ্গে মিলছে না। অনুগ্রহ করে <strong>EV-01 (অডিও কনসোল)</strong>, <strong>EV-03 ও EV-04 (১৫ মিনিটের ঘড়ির গরমিল)</strong> এবং <strong>গোপন ভল্টের চুক্তিপত্র</strong> পুনরায় মিলিয়ে দেখুন।
+                  আপনার দাখিল করা তথ্যগুলোর মধ্যে অন্তত একটি সূত্র প্রমাণপত্রের সঙ্গে মিলছে না। অনুগ্রহ করে <strong>EV-06 (অডিও কনসোল)</strong>, <strong>EV-02 ও EV-03 (১৫ মিনিটের ঘড়ির গরমিল)</strong> এবং <strong>গোপন ভল্টের চুক্তিপত্র</strong> পুনরায় মিলিয়ে দেখুন।
                 </p>
               </div>
             `;
