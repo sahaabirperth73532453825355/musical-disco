@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>সুরের অন্তরালে: স্টুডিও ৭ — Case #2026/04 | Audio Archive Kolkata</title>
+  <title>সুরের অন্তরালে: স্টুডিও ৭ — লালবাজার স্পেশাল ব্রাঞ্চ | Case #2026/04</title>
 
-  <!-- Google Fonts: Cinzel, Noto Serif Bengali, Tiro Bangla, JetBrains Mono -->
+  <!-- Google Fonts: Cinzel, Playfair Display, Noto Serif Bengali, Galada, Courier Prime, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Galada&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+Bengali:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap"
     rel="stylesheet"
   />
 
@@ -20,16 +20,20 @@
       theme: {
         extend: {
           colors: {
-            charcoal: '#0D0D0D',
-            console: '#1C1917',
-            parchment: '#F4EFE6',
-            crimson: '#991B1B',
-            ambervu: '#D97706',
+            charcoal: '#0A0908',
+            console: '#171412',
+            manila: '#E7DEC8',
+            parchment: '#F3ECD8',
+            crimson: '#8B1515',
+            ambervu: '#C87D16',
+            khaki: '#4A4336',
           },
           fontFamily: {
             cinzel: ['"Cinzel"', 'serif'],
+            display: ['"Playfair Display"', 'serif'],
             bengali: ['"Noto Serif Bengali"', 'serif'],
-            tiro: ['"Tiro Bangla"', 'serif'],
+            signature: ['"Galada"', 'cursive'],
+            typewriter: ['"Courier Prime"', 'monospace'],
             mono: ['"JetBrains Mono"', 'monospace'],
           },
         },
@@ -38,18 +42,22 @@
   </script>
 
   <style>
-    /* Base Aesthetic & Typography */
+    /* Lalbazar Detective Department & 1990s Kolkata Police Dossier Aesthetic */
     :root {
-      --bg-charcoal: #0D0D0D;
-      --bg-console: #1C1917;
-      --bg-parchment: #F4EFE6;
-      --accent-crimson: #991B1B;
-      --accent-amber: #D97706;
+      --bg-charcoal: #0A0908;
+      --bg-console: #171412;
+      --bg-manila: #E7DEC8;
+      --bg-parchment: #F3ECD8;
+      --accent-crimson: #8B1515;
+      --accent-amber: #C87D16;
     }
 
     html, body {
       background-color: var(--bg-charcoal);
-      color: #E7E5E4;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(139, 21, 21, 0.14) 0%, transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(200, 125, 22, 0.08) 0%, transparent 45%);
+      color: #E7E2D8;
       font-family: 'Noto Serif Bengali', serif;
       overflow-x: hidden;
       scroll-behavior: smooth;
@@ -61,65 +69,74 @@
       height: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #0D0D0D;
+      background: #0A0908;
     }
     ::-webkit-scrollbar-thumb {
-      background: #44403C;
-      border-radius: 2px;
+      background: #4A4336;
+      border-radius: 1px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #D97706;
+      background: #C87D16;
     }
 
-    /* Subtle Film-Grain Texture Overlay using SVG Noise */
+    /* Subtle Film-Grain & Aged Paper Noise Overlay */
     .film-grain {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 60;
-      opacity: 0.045;
+      opacity: 0.055;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* Scanline subtle studio CRT tint */
-    .crt-scanlines {
-      background: linear-gradient(
-        rgba(18, 16, 16, 0) 50%,
-        rgba(0, 0, 0, 0.18) 50%
+    /* Police Chevrons & Hazard Bar */
+    .lalbazar-stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        #8B1515,
+        #8B1515 10px,
+        #171412 10px,
+        #171412 20px
       );
-      background-size: 100% 4px;
     }
 
-    /* Authentic Ink Stamp */
+    /* Manila Case Folder Tab Effect */
+    .manila-folder {
+      background: linear-gradient(180deg, #EFE7D3 0%, #E2D6BA 100%);
+      color: #1A1613;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+
+    /* Authentic Red Rubber Ink Stamp */
     .ink-stamp {
-      border: 2.5px solid currentColor;
-      padding: 0.25rem 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
+      border: 2.5px double currentColor;
+      padding: 0.25rem 0.75rem;
+      font-family: 'Courier Prime', monospace;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       display: inline-block;
       position: relative;
       box-shadow: inset 0 0 0 1px currentColor;
-      opacity: 0.88;
+      opacity: 0.9;
     }
 
     /* Lined Notebook Paper Style (EV-05 & EV-07) */
     .lined-paper {
-      background-color: #F4EFE6;
+      background-color: #F3ECD8;
       background-image:
-        linear-gradient(90deg, transparent 36px, rgba(153, 27, 27, 0.28) 36px, rgba(153, 27, 27, 0.28) 38px, transparent 38px),
-        repeating-linear-gradient(transparent, transparent 27px, rgba(120, 113, 108, 0.25) 28px);
+        linear-gradient(90deg, transparent 36px, rgba(139, 21, 21, 0.35) 36px, rgba(139, 21, 21, 0.35) 38px, transparent 38px),
+        repeating-linear-gradient(transparent, transparent 27px, rgba(92, 82, 68, 0.28) 28px);
       line-height: 28px;
-      color: #1C1917;
+      color: #1A1613;
     }
 
     /* Thermal Paper Receipt Style (EV-06) */
     .thermal-paper {
       background: #F6F4EE;
-      color: #1C1917;
+      color: #1A1613;
       position: relative;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
     }
     .thermal-paper::after {
       content: '';
@@ -171,62 +188,69 @@
   <div class="film-grain" aria-hidden="true"></div>
 
   <!-- ===================================================================== -->
-  <!-- 1. INVESTIGATOR LOGIN SCREEN                                          -->
+  <!-- 1. LALBAZAR SPECIAL BRANCH LOGIN TERMINAL                             -->
   <!-- ===================================================================== -->
   <section id="login-screen" class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative">
-    <!-- Subtle radial vignette -->
-    <div class="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_center,rgba(217,119,6,0.06)_0%,rgba(13,13,13,0.96)_72%)]"></div>
+    <div class="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_center,rgba(139,21,21,0.12)_0%,rgba(10,9,8,0.96)_72%)]"></div>
 
-    <div class="relative z-10 w-full max-w-md bg-console border border-stone-700 rounded-sm shadow-2xl overflow-hidden">
-      <!-- Top Studio Console Trim -->
+    <div class="relative z-10 w-full max-w-lg bg-console border-2 border-khaki rounded-sm shadow-2xl overflow-hidden">
+      <!-- Top Lalbazar Police Caution Bar -->
+      <div class="h-2 w-full lalbazar-stripe"></div>
       <div class="bg-stone-950 border-b border-stone-800 px-5 py-3 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-crimson led-pulse text-red-600"></span>
-          <span class="font-mono text-[11px] tracking-widest text-stone-400 uppercase">Tollygunge Archive // Node 07</span>
+          <span class="font-typewriter text-xs tracking-widest text-ambervu font-bold uppercase">LALBAZAR HQ // DETECTIVE DEPT.</span>
         </div>
-        <span class="font-mono text-[10px] text-ambervu tracking-wider">ANALOG-SYS v4.2</span>
+        <span class="font-mono text-[10px] text-stone-400 tracking-wider">KOLKATA POLICE ARCHIVE</span>
       </div>
 
       <div class="p-6 sm:p-8">
-        <!-- Classified Badge -->
-        <div class="flex justify-center mb-5">
-          <div class="ink-stamp text-crimson text-[10px] sm:text-xs -rotate-1 bg-crimson/10">
-            TOP SECRET // STUDIO ARCHIVE ACCESS
+        <!-- Lalbazar Crest Emblem + Classified Stamp -->
+        <div class="flex flex-col items-center mb-5">
+          <div class="w-16 h-16 rounded-full bg-stone-950 border-2 border-ambervu/80 flex items-center justify-center text-ambervu shadow-lg mb-3">
+            <svg class="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 4v6c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V6l7-4z" />
+              <circle cx="12" cy="11" r="2.5" />
+              <path stroke-linecap="round" d="M12 6.5v2M12 13.5v2.5M8.5 11h1.5M14 11h1.5" />
+            </svg>
+          </div>
+          <div class="ink-stamp text-crimson text-[11px] sm:text-xs -rotate-1 bg-crimson/10">
+            GOVT. OF WEST BENGAL // LALBAZAR SPECIAL CELL
           </div>
         </div>
 
         <!-- Title Block -->
-        <div class="text-center mb-7">
-          <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-ambervu mb-1">
-            Kolkata Audio Forensics Bureau
+        <div class="text-center mb-7 border-y border-stone-800 py-4 bg-stone-950/50">
+          <p class="font-cinzel text-xs uppercase tracking-[0.28em] text-ambervu font-bold mb-1">
+            Calcutta Police — Audio Forensics Unit
           </p>
-          <h1 class="font-bengali text-2xl sm:text-3xl font-bold text-parchment tracking-wide">
+          <h1 class="font-bengali text-2xl sm:text-3xl font-extrabold text-parchment tracking-wide">
             সুরের অন্তরালে: স্টুডিও ৭
           </h1>
-          <p class="font-mono text-xs text-stone-400 mt-1.5">
-            CASE FILE #2026/04 — RESTRICTED TERMINAL
+          <p class="font-typewriter text-xs text-stone-400 mt-1.5">
+            DOCKET #LBZ/2026/04 — TOLLYGUNGE DIVISION
           </p>
         </div>
 
         <!-- Login Form -->
         <form id="login-form" class="space-y-4" autocomplete="off">
           <div>
-            <label for="agent-id" class="block font-mono text-xs uppercase tracking-wider text-stone-400 mb-1.5">
-              Agent ID
+            <label for="agent-id" class="block font-typewriter text-xs uppercase tracking-wider text-stone-300 mb-1.5 font-bold">
+              Investigating Officer ID
             </label>
             <input
               id="agent-id"
               name="agentId"
               type="text"
               required
-              placeholder="ENTER AGENT ID"
-              class="w-full bg-stone-950 border border-stone-700 focus:border-ambervu focus:outline-none px-3.5 py-2.5 rounded-sm font-mono text-sm text-parchment tracking-widest uppercase placeholder:text-stone-600 transition-colors"
+              placeholder="ENTER OFFICER ID"
+              class="w-full bg-stone-950 border border-khaki focus:border-ambervu focus:outline-none px-3.5 py-2.5 rounded-sm font-typewriter text-sm text-parchment tracking-widest uppercase placeholder:text-stone-600 transition-colors"
             />
           </div>
 
           <div>
-            <label for="agent-passcode" class="block font-mono text-xs uppercase tracking-wider text-stone-400 mb-1.5">
-              Passcode
+            <label for="agent-passcode" class="block font-typewriter text-xs uppercase tracking-wider text-stone-300 mb-1.5 font-bold">
+              Confidential Passcode
             </label>
             <input
               id="agent-passcode"
@@ -235,112 +259,121 @@
               required
               inputmode="numeric"
               placeholder="••••"
-              class="w-full bg-stone-950 border border-stone-700 focus:border-ambervu focus:outline-none px-3.5 py-2.5 rounded-sm font-mono text-sm text-parchment tracking-[0.35em] placeholder:text-stone-600 transition-colors"
+              class="w-full bg-stone-950 border border-khaki focus:border-ambervu focus:outline-none px-3.5 py-2.5 rounded-sm font-typewriter text-sm text-parchment tracking-[0.35em] placeholder:text-stone-600 transition-colors"
             />
           </div>
 
-          <!-- Inline Auth Error Message (no alert()) -->
+          <!-- Inline Auth Error Message -->
           <div
             id="login-error"
-            class="hidden bg-crimson/15 border border-crimson/70 text-red-300 px-3.5 py-2.5 rounded-sm font-mono text-xs flex items-center gap-2"
+            class="hidden bg-crimson/20 border border-crimson text-red-300 px-3.5 py-2.5 rounded-sm font-typewriter text-xs flex items-center gap-2"
             role="alert"
           >
             <svg class="w-4 h-4 shrink-0 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
             </svg>
-            <span>ACCESS DENIED — INVALID CREDENTIALS LOGGED</span>
+            <span>UNAUTHORIZED ACCESS — LALBAZAR SECURITY ALERT</span>
           </div>
 
           <button
             type="submit"
-            class="w-full mt-2 bg-ambervu hover:bg-amber-500 active:bg-amber-700 text-stone-950 font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] py-3 px-4 rounded-sm transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg"
+            class="w-full mt-2 bg-crimson hover:bg-red-800 active:bg-red-900 border border-ambervu/50 text-parchment font-cinzel font-bold text-xs sm:text-sm uppercase tracking-[0.2em] py-3 px-4 rounded-sm transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-ambervu" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
-            <span>Authenticate Terminal</span>
+            <span>Open Case Dossier</span>
           </button>
         </form>
 
         <!-- Public Archive Access Info -->
-        <div class="mt-4 bg-stone-950/80 border border-stone-800 px-3 py-2 rounded-sm flex items-center justify-between gap-2 font-mono text-[11px] text-stone-400">
+        <div class="mt-4 bg-stone-950/90 border border-khaki/70 px-3.5 py-2.5 rounded-sm flex items-center justify-between gap-2 font-typewriter text-xs text-stone-300">
           <span>
-            ID: <span class="text-ambervu font-semibold">admin</span> | PASS: <span class="text-ambervu font-semibold">123</span>
+            ID: <span class="text-ambervu font-bold">admin</span> | PASS: <span class="text-ambervu font-bold">123</span>
           </span>
           <button
             id="autofill-login-btn"
             type="button"
             title="Auto-fill credentials"
-            class="bg-stone-900 hover:bg-ambervu hover:text-stone-950 border border-stone-700 hover:border-ambervu text-ambervu px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+            class="bg-ambervu/20 hover:bg-ambervu hover:text-stone-950 border border-ambervu text-amber-300 px-2.5 py-1 rounded-sm text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer shrink-0"
           >
             AUTO-FILL
           </button>
         </div>
 
         <!-- Footer Archive Seal -->
-        <div class="mt-5 pt-4 border-t border-stone-800 flex items-center justify-between font-mono text-[10px] text-stone-500">
-          <span>CONFIDENTIAL // AUDIO ARCHIVE KOLKATA</span>
-          <span>EST. 1991</span>
+        <div class="mt-5 pt-4 border-t border-stone-800 flex items-center justify-between font-typewriter text-[11px] text-stone-500">
+          <span>LALBAZAR CRIME RECORD OFFICE</span>
+          <span>CALCUTTA // 18 LALBAZAR ST.</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===================================================================== -->
-  <!-- 2. MAIN CASE DASHBOARD                                                -->
+  <!-- 2. MAIN LALBAZAR CASE DASHBOARD                                       -->
   <!-- ===================================================================== -->
   <div id="dashboard-screen" class="hidden min-h-screen flex flex-col">
-    <!-- Top Archive Header -->
-    <header class="bg-console border-b border-stone-800 sticky top-0 z-30 shadow-lg">
+    <!-- Top Lalbazar Police Header -->
+    <header class="bg-console border-b-2 border-khaki sticky top-0 z-30 shadow-2xl">
+      <div class="h-1.5 w-full lalbazar-stripe"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
           <!-- Brand & Case Title -->
           <div class="flex items-start sm:items-center gap-3.5">
-            <!-- Studio Reel Icon -->
-            <div class="w-11 h-11 shrink-0 bg-stone-950 border border-stone-700 rounded-sm flex items-center justify-center text-ambervu">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9" />
-                <circle cx="12" cy="12" r="2.5" />
-                <path stroke-linecap="round" d="M12 3v4M12 17v4M4.2 7.5l3.5 2M16.3 14.5l3.5 2M19.8 7.5l-3.5 2M7.7 14.5l-3.5 2" />
+            <!-- Lalbazar Shield Crest -->
+            <div class="w-12 h-12 shrink-0 bg-stone-950 border-2 border-ambervu/80 rounded-sm flex items-center justify-center text-ambervu shadow-md">
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 4v6c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V6l7-4z" />
+                <circle cx="12" cy="11" r="2.2" />
               </svg>
             </div>
             <div>
               <div class="flex flex-wrap items-center gap-2">
-                <span class="font-mono text-[11px] bg-stone-950 border border-stone-700 px-2 py-0.5 rounded-sm text-ambervu font-semibold">
-                  CASE #2026/04
+                <span class="font-typewriter text-xs bg-crimson text-parchment px-2 py-0.5 rounded-sm font-bold tracking-wider">
+                  LALBAZAR CASE #2026/04
                 </span>
-                <span class="font-mono text-[10px] text-stone-400 tracking-wider uppercase hidden sm:inline">
-                  CONFIDENTIAL // AUDIO ARCHIVE KOLKATA
+                <span class="font-cinzel text-[11px] text-ambervu font-bold tracking-widest uppercase hidden sm:inline">
+                  CALCUTTA POLICE // DETECTIVE DEPARTMENT
                 </span>
               </div>
-              <h1 class="font-bengali text-lg sm:text-2xl font-bold text-parchment leading-tight mt-0.5">
+              <h1 class="font-bengali text-xl sm:text-2xl font-extrabold text-parchment leading-tight mt-0.5">
                 সুরের অন্তরালে: স্টুডিও ৭
               </h1>
             </div>
           </div>
 
           <!-- Case Metadata & Status -->
-          <div class="flex flex-wrap items-center gap-2.5 sm:gap-4 text-xs">
-            <div class="bg-stone-950/90 border border-stone-800 px-3 py-1.5 rounded-sm">
-              <span class="block font-mono text-[10px] uppercase text-stone-500">ঘটনা (Incident)</span>
-              <span class="font-bengali text-stone-200 font-medium">অপ্রকাশিত মাস্টার ট্র্যাক চুরি ও টেপ মুছে ফেলা</span>
+          <div class="flex flex-wrap items-center gap-2.5 sm:gap-3.5 text-xs">
+            <div class="bg-stone-950 border border-khaki/70 px-3 py-1.5 rounded-sm">
+              <span class="block font-typewriter text-[10px] uppercase text-ambervu font-bold">অভিযোগ (Charge)</span>
+              <span class="font-bengali text-stone-200 font-semibold">অপ্রকাশিত মাস্টার ট্র্যাক চুরি ও টেপ মুছে ফেলা</span>
             </div>
-            <div class="bg-stone-950/90 border border-stone-800 px-3 py-1.5 rounded-sm">
-              <span class="block font-mono text-[10px] uppercase text-stone-500">স্থান (Location)</span>
-              <span class="font-bengali text-stone-200 font-medium">স্টুডিও ৭, টালিগঞ্জ, কলকাতা</span>
+            <div class="bg-stone-950 border border-khaki/70 px-3 py-1.5 rounded-sm">
+              <span class="block font-typewriter text-[10px] uppercase text-ambervu font-bold">থানা / এলাকা (P.S.)</span>
+              <span class="font-bengali text-stone-200 font-semibold">স্টুডিও ৭, টালিগঞ্জ থানা, কলকাতা</span>
             </div>
             <div class="flex items-center gap-2">
               <span
                 id="case-status-badge"
-                class="ink-stamp text-crimson bg-crimson/10 text-[11px] px-2.5 py-1"
+                class="ink-stamp text-crimson bg-crimson/15 text-[11px] px-2.5 py-1"
               >
                 STATUS: UNSOLVED
               </span>
               <button
+                id="ambient-toggle-btn"
+                type="button"
+                title="Toggle Mild Detective Ambient Tone"
+                class="bg-stone-950 hover:bg-stone-900 border border-ambervu/70 text-amber-300 px-2.5 py-1.5 rounded-sm font-typewriter text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
+              >
+                <span id="ambient-led" class="w-2 h-2 rounded-full bg-ambervu led-pulse text-ambervu"></span>
+                <span id="ambient-label">BGM: ON</span>
+              </button>
+              <button
                 id="logout-btn"
                 type="button"
-                title="Lock Terminal"
-                class="bg-stone-950 hover:bg-stone-800 border border-stone-700 text-stone-300 px-2.5 py-1.5 rounded-sm font-mono text-[11px] transition-colors cursor-pointer"
+                title="Lock Dossier"
+                class="bg-stone-950 hover:bg-crimson border border-khaki text-stone-200 px-3 py-1.5 rounded-sm font-typewriter text-xs font-bold transition-colors cursor-pointer"
               >
                 LOCK
               </button>
@@ -349,19 +382,19 @@
         </div>
       </div>
 
-      <!-- Navigation Tabs -->
+      <!-- Folder-Tab Navigation -->
       <nav class="bg-stone-950 border-t border-stone-800" aria-label="Case Dashboard Sections">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex overflow-x-auto no-scrollbar gap-1 sm:gap-2 py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 pt-2">
           <button
             type="button"
             data-tab="evidence"
-            class="tab-btn shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-sm font-bengali text-sm font-semibold border transition-all cursor-pointer bg-ambervu/15 border-ambervu text-amber-300"
+            class="tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-t-sm font-bengali text-sm font-bold border-t-2 border-x transition-all cursor-pointer bg-console border-ambervu text-amber-300"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
             </svg>
-            <span>প্রমাণপত্র</span>
-            <span class="font-mono text-[10px] bg-stone-900 px-1.5 py-0.5 rounded-sm text-stone-400">07</span>
+            <span>জব্দকৃত প্রমাণপত্র</span>
+            <span class="font-typewriter text-[11px] bg-stone-900 px-1.5 py-0.5 rounded-sm text-ambervu font-bold">07</span>
           </button>
 
           <button
@@ -373,30 +406,30 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
             </svg>
             <span>সন্দেহভাজন তালিকা</span>
-            <span class="font-mono text-[10px] bg-stone-900 px-1.5 py-0.5 rounded-sm text-stone-400">05</span>
+            <span class="font-mono text-[10px] bg-stone-900 px-1.5 py-0.5 rounded-sm text-stone-400">08</span>
           </button>
 
           <button
             type="button"
             data-tab="vault"
-            class="tab-btn shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-sm font-bengali text-sm font-semibold border border-stone-800 text-stone-400 hover:text-stone-200 hover:border-stone-600 transition-all cursor-pointer"
+            class="tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-t-sm font-bengali text-sm font-bold border-t-2 border-x border-transparent text-stone-400 hover:text-stone-200 hover:bg-stone-900/60 transition-all cursor-pointer"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
             <span>গোপন ভল্ট</span>
-            <span id="vault-tab-status" class="font-mono text-[10px] bg-crimson/20 text-red-400 px-1.5 py-0.5 rounded-sm">LOCKED</span>
+            <span id="vault-tab-status" class="font-typewriter text-[10px] bg-crimson/25 text-red-400 px-1.5 py-0.5 rounded-sm font-bold">LOCKED</span>
           </button>
 
           <button
             type="button"
             data-tab="verdict"
-            class="tab-btn shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-sm font-bengali text-sm font-semibold border border-stone-800 text-stone-400 hover:text-stone-200 hover:border-stone-600 transition-all cursor-pointer"
+            class="tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-t-sm font-bengali text-sm font-bold border-t-2 border-x border-transparent text-stone-400 hover:text-stone-200 hover:bg-stone-900/60 transition-all cursor-pointer"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
             </svg>
-            <span>রহস্যের সমাধান</span>
+            <span>চার্জশিট ও সমাধান</span>
           </button>
         </div>
       </nav>
@@ -404,48 +437,48 @@
 
     <!-- Main Content Container -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
-      <!-- Investigator Brief Banner -->
-      <div class="mb-6 bg-console border border-stone-800 border-l-4 border-l-ambervu p-4 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <!-- Lalbazar Case Diary Briefing -->
+      <div class="mb-6 bg-console border border-khaki border-l-4 border-l-crimson p-4 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
         <div>
-          <p class="font-mono text-[11px] uppercase tracking-wider text-ambervu">
-            INVESTIGATOR TERMINAL // ACTIVE INVESTIGATION BRIEFING
+          <p class="font-typewriter text-xs uppercase tracking-wider text-ambervu font-bold">
+            LALBAZAR CASE DIARY // SPECIAL INVESTIGATION NOTE
           </p>
-          <p class="font-bengali text-sm text-stone-300 mt-1">
-            টালিগঞ্জের ঐতিহ্যবাহী ‘স্টুডিও ৭’-এ গভীর রাতে অপ্রকাশিত অ্যালবামের অ্যানালগ মাস্টার ট্র্যাক চুরি ও মুছে ফেলা হয়েছে। প্রতিটি অডিও রিল, সময়ের গরমিল এবং নথিপত্র খুঁটিয়ে দেখে অপরাধী, প্রমাণিত পদ্ধতি ও সঠিক সময় নির্ণয় করুন।
+          <p class="font-bengali text-sm text-stone-200 mt-1 leading-relaxed">
+            টালিগঞ্জের ঐতিহ্যবাহী ‘স্টুডিও ৭’-এ গভীর রাতে অপ্রকাশিত অ্যালবামের অ্যানালগ মাস্টার ট্র্যাক চুরি ও মুছে ফেলা হয়েছে। লালবাজার ফরেনসিক ল্যাব থেকে সংগৃহীত অডিও টেপ, জবানবন্দি ও নথিপত্র পরীক্ষা করে মূল অপরাধী, প্রমাণিত পদ্ধতি ও সঠিক সময় চার্জশিটে দাখিল করুন।
           </p>
         </div>
-        <div class="shrink-0 font-mono text-[11px] text-stone-400 bg-stone-950 border border-stone-800 px-3 py-2 rounded-sm">
-          EXAMINED: <span id="examined-count" class="text-ambervu font-bold">0</span> / 7 FILES
+        <div class="shrink-0 font-typewriter text-xs text-stone-300 bg-stone-950 border border-khaki px-3.5 py-2 rounded-sm">
+          EXHIBITS CHECKED: <span id="examined-count" class="text-ambervu font-bold">0</span> / 7
         </div>
       </div>
 
       <!-- ================================================================= -->
-      <!-- TAB 1: প্রমাণপত্র (EVIDENCE FILES — 7 INTERACTIVE CARDS)          -->
+      <!-- TAB 1: জব্দকৃত প্রমাণপত্র (EVIDENCE FILES — 7 CARDS)               -->
       <!-- ================================================================= -->
       <section id="tab-evidence" class="tab-panel">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="font-bengali text-xl font-bold text-parchment flex items-center gap-2">
-            <span class="w-2 h-5 bg-ambervu inline-block rounded-sm"></span>
-            সংগৃহীত প্রমাণপত্র (Evidence Archive)
+          <h2 class="font-bengali text-xl font-bold text-parchment flex items-center gap-2.5">
+            <span class="w-2.5 h-5 bg-ambervu inline-block rounded-sm"></span>
+            জব্দকৃত প্রমাণপত্র (Seized Forensics &amp; Exhibits)
           </h2>
-          <span class="font-mono text-xs text-stone-500 hidden sm:inline">CLICK ANY REEL BOX OR FILE TO INSPECT</span>
+          <span class="font-typewriter text-xs text-stone-400 hidden sm:inline">CLICK ANY EXHIBIT FOLDER TO INSPECT</span>
         </div>
 
         <div id="evidence-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- Populated dynamically by JS for clean data management -->
+          <!-- Populated dynamically by JS -->
         </div>
       </section>
 
       <!-- ================================================================= -->
-      <!-- TAB 2: সন্দেহভাজন তালিকা (SUSPECTS DATABASE — 5 PROFILES)         -->
+      <!-- TAB 2: সন্দেহভাজন তালিকা (SUSPECTS DATABASE — 8 PROFILES)         -->
       <!-- ================================================================= -->
       <section id="tab-suspects" class="tab-panel hidden">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="font-bengali text-xl font-bold text-parchment flex items-center gap-2">
-            <span class="w-2 h-5 bg-crimson inline-block rounded-sm"></span>
-            সন্দেহভাজন তালিকা (Suspect Dossiers)
+          <h2 class="font-bengali text-xl font-bold text-parchment flex items-center gap-2.5">
+            <span class="w-2.5 h-5 bg-crimson inline-block rounded-sm"></span>
+            সন্দেহভাজন ডসিয়ার (Suspect Interrogation Dossiers)
           </h2>
-          <span class="font-mono text-xs text-stone-500 hidden sm:inline">CROSS-REFERENCE ALIBIS WITH AUDIO TIMESTAMPS</span>
+          <span class="font-typewriter text-xs text-stone-400 hidden sm:inline">CROSS-REFERENCE ALIBIS WITH AUDIO TIMESTAMPS</span>
         </div>
 
         <div id="suspects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -459,24 +492,24 @@
       <section id="tab-vault" class="tab-panel hidden">
         <div class="max-w-3xl mx-auto">
           <!-- Locked State -->
-          <div id="vault-locked-view" class="bg-console border border-stone-700 rounded-sm p-6 sm:p-8 shadow-2xl">
+          <div id="vault-locked-view" class="bg-console border-2 border-khaki rounded-sm p-6 sm:p-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-800 pb-4 mb-6">
               <div>
-                <span class="font-mono text-[11px] uppercase tracking-widest text-ambervu">STUDIO 7 // ENCRYPTED MASTER VAULT</span>
+                <span class="font-typewriter text-xs uppercase tracking-widest text-ambervu font-bold">STUDIO 7 // SEALED ARCHIVE VAULT</span>
                 <h2 class="font-bengali text-2xl font-bold text-parchment mt-1">গোপন মাস্টার ভল্ট</h2>
               </div>
               <span class="ink-stamp text-crimson text-xs self-start">FREQ-LOCK ACTIVE</span>
             </div>
 
-            <p class="font-bengali text-sm text-stone-300 leading-relaxed mb-6">
-              স্টুডিওর প্রধান অ্যানালগ ভল্টটি ৪-সংখ্যার একটি অডিও ফ্রিকোয়েন্সি কোড দ্বারা সুরক্ষিত। <span class="text-amber-300 font-semibold">EV-01 (Analog Reel-to-Reel Audio Console)</span>-এর অডিও ফাইলগুলো পরীক্ষা করে এবং <span class="text-amber-300">Frequency Analyzer</span> ব্যবহার করে গোপন কোডটি উদ্ধার করুন।
+            <p class="font-bengali text-sm text-stone-200 leading-relaxed mb-6">
+              স্টুডিওর প্রধান অ্যানালগ ভল্টটি ৪-সংখ্যার একটি অডিও ফ্রিকোয়েন্সি কোড দ্বারা সুরক্ষিত। <span class="text-amber-300 font-bold">EV-01 (Analog Reel-to-Reel Audio Console)</span>-এর অডিও ফাইলগুলো পরীক্ষা করে এবং <span class="text-amber-300 font-bold">Frequency Analyzer</span> ব্যবহার করে গোপন কোডটি উদ্ধার করুন।
             </p>
 
             <!-- 4-Digit Display -->
-            <div class="bg-stone-950 border border-stone-800 p-5 rounded-sm mb-6">
+            <div class="bg-stone-950 border border-khaki p-5 rounded-sm mb-6">
               <div class="flex items-center justify-between mb-3">
-                <span class="font-mono text-[11px] text-stone-500 uppercase">Frequency Passcode Entry</span>
-                <span class="font-mono text-[11px] text-ambervu">4-DIGIT HZ CODE</span>
+                <span class="font-typewriter text-xs text-stone-400 uppercase">Frequency Passcode Entry</span>
+                <span class="font-typewriter text-xs text-ambervu font-bold">4-DIGIT HZ CODE</span>
               </div>
               <form id="vault-form" class="flex flex-col sm:flex-row gap-3">
                 <input
@@ -486,11 +519,11 @@
                   inputmode="numeric"
                   placeholder="_ _ _ _"
                   autocomplete="off"
-                  class="flex-1 bg-charcoal border border-stone-700 focus:border-ambervu focus:outline-none px-4 py-3 rounded-sm font-mono text-2xl text-center tracking-[0.6em] text-amber-400 placeholder:text-stone-700"
+                  class="flex-1 bg-charcoal border border-khaki focus:border-ambervu focus:outline-none px-4 py-3 rounded-sm font-typewriter text-2xl text-center tracking-[0.6em] text-amber-400 placeholder:text-stone-700"
                 />
                 <button
                   type="submit"
-                  class="bg-ambervu hover:bg-amber-500 text-stone-950 font-mono font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm transition-colors cursor-pointer"
+                  class="bg-crimson hover:bg-red-800 border border-ambervu/50 text-parchment font-cinzel font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm transition-colors cursor-pointer"
                 >
                   Unlock Vault
                 </button>
@@ -498,79 +531,79 @@
 
               <!-- Tactile Studio Keypad -->
               <div class="grid grid-cols-5 sm:grid-cols-10 gap-2 mt-4">
-                <button type="button" data-key="1" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">1</button>
-                <button type="button" data-key="2" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">2</button>
-                <button type="button" data-key="3" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">3</button>
-                <button type="button" data-key="4" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">4</button>
-                <button type="button" data-key="5" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">5</button>
-                <button type="button" data-key="6" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">6</button>
-                <button type="button" data-key="7" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">7</button>
-                <button type="button" data-key="8" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">8</button>
-                <button type="button" data-key="9" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">9</button>
-                <button type="button" data-key="0" class="vault-key bg-stone-900 hover:bg-stone-800 border border-stone-700 py-2 font-mono text-sm text-stone-200 rounded-sm cursor-pointer">0</button>
+                <button type="button" data-key="1" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">1</button>
+                <button type="button" data-key="2" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">2</button>
+                <button type="button" data-key="3" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">3</button>
+                <button type="button" data-key="4" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">4</button>
+                <button type="button" data-key="5" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">5</button>
+                <button type="button" data-key="6" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">6</button>
+                <button type="button" data-key="7" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">7</button>
+                <button type="button" data-key="8" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">8</button>
+                <button type="button" data-key="9" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">9</button>
+                <button type="button" data-key="0" class="vault-key bg-stone-900 hover:bg-stone-800 border border-khaki/80 py-2 font-typewriter text-sm text-stone-200 rounded-sm cursor-pointer">0</button>
               </div>
               <div class="flex justify-end mt-2">
-                <button id="vault-clear-btn" type="button" class="font-mono text-[11px] text-stone-400 hover:text-ambervu uppercase cursor-pointer">
+                <button id="vault-clear-btn" type="button" class="font-typewriter text-xs text-stone-400 hover:text-ambervu uppercase cursor-pointer">
                   [ Clear Input ]
                 </button>
               </div>
 
               <!-- Vault Error -->
-              <div id="vault-error" class="hidden mt-4 bg-crimson/15 border border-crimson/70 text-red-300 px-3.5 py-2.5 rounded-sm font-mono text-xs">
-                FREQUENCY MISMATCH — RE-ANALYZE CORRUPTED TAPE (EV-01, TRACK 02)
+              <div id="vault-error" class="hidden mt-4 bg-crimson/20 border border-crimson text-red-300 px-3.5 py-2.5 rounded-sm font-typewriter text-xs">
+                FREQUENCY MISMATCH — RE-ANALYZE CORRUPTED TAPE (EV-01)
               </div>
             </div>
           </div>
 
           <!-- Unlocked State: Classified Royalty & Credit Contract Draft -->
           <div id="vault-unlocked-view" class="hidden space-y-5">
-            <div class="bg-emerald-950/30 border border-emerald-700/60 p-4 rounded-sm flex items-center justify-between">
+            <div class="bg-emerald-950/35 border border-emerald-700/70 p-4 rounded-sm flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="w-3 h-3 rounded-full bg-emerald-400 led-pulse text-emerald-400"></span>
                 <div>
-                  <p class="font-mono text-xs text-emerald-300 font-bold uppercase tracking-wider">VAULT DECRYPTED // CODE 4320 VERIFIED</p>
-                  <p class="font-bengali text-xs text-stone-300">গোপন ফাইল উদ্ধার করা হয়েছে: রয়্যালটি ও ক্রেডিট চুক্তির খসড়া</p>
+                  <p class="font-typewriter text-xs text-emerald-300 font-bold uppercase tracking-wider">VAULT DECRYPTED // CODE 4320 VERIFIED</p>
+                  <p class="font-bengali text-xs text-stone-200">গোপন ফাইল উদ্ধার করা হয়েছে: রয়্যালটি ও ক্রেডিট চুক্তির খসড়া</p>
                 </div>
               </div>
-              <span class="ink-stamp text-emerald-400 text-[10px]">ACCESS GRANTED</span>
+              <span class="ink-stamp text-emerald-400 text-[10px]">SEIZED EXHIBIT</span>
             </div>
 
             <!-- Parchment Contract Document -->
-            <article class="bg-parchment text-stone-900 border-2 border-stone-600 rounded-sm p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-              <div class="absolute top-5 right-5 ink-stamp text-crimson text-[10px] sm:text-xs rotate-6 opacity-80">
-                CONFIDENTIAL // LEGAL DRAFT
+            <article class="manila-folder border-2 border-stone-700 rounded-sm p-6 sm:p-8 relative overflow-hidden">
+              <div class="absolute top-5 right-5 ink-stamp text-crimson text-[10px] sm:text-xs rotate-6 opacity-85">
+                LALBAZAR SEIZED // CONFIDENTIAL
               </div>
 
               <div class="border-b-2 border-stone-800 pb-4 mb-5">
-                <p class="font-mono text-[11px] uppercase tracking-widest text-stone-600">
-                  SURADHWANI RECORDS KOLKATA — ROYALTY &amp; CREDIT AGREEMENT (FINAL DRAFT)
+                <p class="font-typewriter text-xs uppercase tracking-widest text-stone-700 font-bold">
+                  SURADHWANI RECORDS CALCUTTA — ROYALTY &amp; CREDIT AGREEMENT (FINAL DRAFT)
                 </p>
-                <h3 class="font-bengali text-2xl font-bold text-stone-950 mt-1">
+                <h3 class="font-bengali text-2xl font-extrabold text-stone-950 mt-1">
                   অ্যালবাম: “রাতের রাগিণী” — স্বত্ব ও ক্রেডিট চুক্তিপত্র
                 </h3>
-                <p class="font-mono text-xs text-stone-600 mt-1">
+                <p class="font-typewriter text-xs text-stone-700 mt-1">
                   REF: SRK/1996/ALB-07 | PREPARED BY: অনিমেষ বসু (রেকর্ড লেবেল ম্যানেজার)
                 </p>
               </div>
 
               <div class="space-y-4 font-bengali text-sm sm:text-base leading-relaxed text-stone-800">
                 <p>
-                  <strong>ধারা ৪.২ (সঙ্গীত পরিচালনা ও ক্রেডিট):</strong> অ্যালবামের মূল ট্র্যাকগুলির সম্পূর্ণ সুরকার ও প্রযোজক হিসেবে শুধুমাত্র সুরধ্বনি লেবেলের ইন-হাউস ব্যানারের নাম প্রকাশিত হবে।
+                  <strong>ধারা ৪.২ (সঙ্গীত পরিচালনা ও মূল সেশন-ফি):</strong> অ্যালবামের মূল ট্র্যাকগুলির সুরকার, প্রযোজক ও লিড ইনস্ট্রুমেন্টালিস্ট হিসেবে <strong class="underline decoration-crimson decoration-2">সৌম্যজিৎ শেখর সাহা</strong>-কে চূড়ান্তভাবে মনোনীত করা হলো। এই কাজের জন্য তাঁকে এককালীন <strong>₹১,০০,০০০ (এক লক্ষ টাকা)</strong> সেশন-ফি এবং অ্যালবামের কভারে প্রধান প্রযোজকের স্বীকৃতি প্রদান করা হবে।
                 </p>
                 <div class="bg-red-900/10 border-l-4 border-crimson p-4 rounded-sm">
                   <p class="font-bold text-crimson mb-1">বিশেষ সংশোধনী (গোপন সংযোজন — চূড়ান্ত মুদ্রণের পূর্বে):</p>
                   <p>
-                    কো-প্রডিউসার ও সেশন গিটারিস্ট <strong class="underline decoration-crimson decoration-2">সৌম্যজিৎ শেখর সাহা</strong>-কে কেবল এককালীন সেশন-ফি (₹৪,৫০০) এবং অ্যাকোস্টিক কনসালট্যান্ট <strong>ডাঃ অন্তর্জিতা মাইতি</strong>-কে এককালীন কনসালট্যান্সি-ফি (₹১,০০০) প্রদান করা হবে। অ্যালবামের কভার, ক্যাসেট ইনলে-কার্ড এবং সমস্ত ভবিষ্যৎ রয়্যালটি তালিকা থেকে <strong>তাঁদের নাম সম্পূর্ণভাবে বাদ দেওয়া হলো</strong>। গানটির মূল অ্যাকোস্টিক সুর ও ৪৩২ হার্জ গিটার অ্যারেঞ্জমেন্ট লেবেলের একক সম্পত্তি হিসেবে গণ্য হবে।
+                    লেবেলের বাজেট ও চুক্তি পুনর্গঠনের কারণে <strong>সৌম্যজিৎ শেখর সাহা</strong>-কে উক্ত ₹১,০০,০০০ টাকা প্রদান করা হবে, তবে মূল স্ট্রিং ও রিদম অ্যারেঞ্জারদের তালিকা থেকে অন্যান্য সহযোগী মিউজিশিয়ানদের নাম ও প্রাপ্য বকেয়া স্থগিত রাখা হলো।
                   </p>
                 </div>
                 <p class="font-tiro italic text-stone-700 text-sm">
-                  — প্রান্তে লাল কালিতে হাতে লেখা নোট (সৌম্যজিতের হাতের লেখার সঙ্গে হুবহু মিল): “আমার সুরে আমার নামই থাকবে না? টেপই যদি না থাকে, তবে ওরা কী রিলিজ করবে দেখা যাক!”
+                  — খসড়ার নিচে নীল কালিতে অস্পষ্ট হাতে লেখা নোট: “সব টাকা আর ক্রেডিট যদি একজনই নিয়ে যায়, তবে আমার রাতজাগা সুরের মূল্য কী? টেপটাই আর থাকতে দেব না!”
                 </p>
               </div>
 
               <div class="mt-6 pt-4 border-t border-stone-400 flex flex-wrap justify-between items-center gap-2 font-mono text-[11px] text-stone-600">
                 <span>ARCHIVE STAMP: STUDIO 7 VAULT</span>
-                <span>EVIDENCE LINK: MOTIVE CONFIRMED (SUS-04)</span>
+                <span>EVIDENCE LINK: ₹1,00,000 SESSION FEE DISPUTE</span>
               </div>
             </article>
           </div>
@@ -581,13 +614,13 @@
       <!-- TAB 4: রহস্যের সমাধান (SUBMIT FINAL VERDICT)                      -->
       <!-- ================================================================= -->
       <section id="tab-verdict" class="tab-panel hidden">
-        <div class="max-w-3xl mx-auto bg-console border border-stone-700 rounded-sm p-6 sm:p-8 shadow-2xl">
+        <div class="max-w-3xl mx-auto bg-console border-2 border-khaki rounded-sm p-6 sm:p-8 shadow-2xl">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-800 pb-4 mb-6">
             <div>
-              <span class="font-mono text-[11px] uppercase tracking-widest text-ambervu">FINAL FORENSIC REPORT // CASE #2026/04</span>
-              <h2 class="font-bengali text-2xl font-bold text-parchment mt-1">রহস্যের চূড়ান্ত সমাধান দাখিল করুন</h2>
+              <span class="font-typewriter text-xs uppercase tracking-widest text-ambervu font-bold">LALBAZAR CHARGE-SHEET // CASE #2026/04</span>
+              <h2 class="font-bengali text-2xl font-bold text-parchment mt-1">চূড়ান্ত তদন্ত রিপোর্ট ও চার্জশিট দাখিল করুন</h2>
             </div>
-            <span class="ink-stamp text-ambervu text-xs self-start">OFFICIAL VERDICT</span>
+            <span class="ink-stamp text-ambervu text-xs self-start">OFFICIAL CHARGE-SHEET</span>
           </div>
 
           <form id="verdict-form" class="space-y-5">
@@ -607,18 +640,21 @@
                 <option value="অনিমেষ বসু">অনিমেষ বসু (রেকর্ড লেবেল ম্যানেজার)</option>
                 <option value="সৌম্যজিৎ শেখর সাহা">সৌম্যজিৎ শেখর সাহা (কো-প্রডিউসার ও সেশন গিটারিস্ট)</option>
                 <option value="হরিপদ দা">হরিপদ দা (নাইট গার্ড)</option>
+                <option value="দেবযানী সেনগুপ্ত">দেবযানী সেনগুপ্ত (লিড ভোকালিস্ট ও গীতিকার)</option>
+                <option value="ঋত্বিক চ্যাটার্জী">ঋত্বিক চ্যাটার্জী (অ্যাকোস্টিক রিদম গিটারিস্ট ও সাউন্ড অ্যারেঞ্জার)</option>
+                <option value="তন্ময় গাঙ্গুলী">তন্ময় গাঙ্গুলী (তবলা ও পারকাশনিস্ট)</option>
               </select>
             </div>
 
             <!-- Selector 2: Method / Clue -->
             <div>
-              <label for="verdict-method" class="block font-bengali text-sm font-semibold text-parchment mb-1.5">
-                ২. প্রমাণিত পদ্ধতি ও প্রধান সূত্র (Method / Clue)
+              <label for="verdict-method" class="block font-bengali text-sm font-bold text-parchment mb-1.5">
+                ২. প্রমাণিত পদ্ধতি ও প্রধান সূত্র (Modus Operandi)
               </label>
               <select
                 id="verdict-method"
                 required
-                class="w-full bg-stone-950 border border-stone-700 focus:border-ambervu focus:outline-none px-4 py-3 rounded-sm font-bengali text-sm text-stone-200 cursor-pointer"
+                class="w-full bg-stone-950 border border-khaki focus:border-ambervu focus:outline-none px-4 py-3 rounded-sm font-bengali text-sm text-stone-200 cursor-pointer"
               >
                 <option value="">-- প্রমাণিত পদ্ধতি নির্বাচন করুন --</option>
                 <option value="ডিজিটাল MIDI কন্ট্রোলার হ্যাক ও মেইন গেট ব্রেক-ইন">ডিজিটাল MIDI কন্ট্রোলার হ্যাক ও মেইন গেট ব্রেক-ইন</option>
@@ -630,13 +666,13 @@
 
             <!-- Selector 3: Actual Time -->
             <div>
-              <label for="verdict-time" class="block font-bengali text-sm font-semibold text-parchment mb-1.5">
-                ৩. অপরাধ সংঘটিত হওয়ার আসল সময় (Actual Time)
+              <label for="verdict-time" class="block font-bengali text-sm font-bold text-parchment mb-1.5">
+                ৩. অপরাধ সংঘটিত হওয়ার আসল সময় (Exact Time of Incident)
               </label>
               <select
                 id="verdict-time"
                 required
-                class="w-full bg-stone-950 border border-stone-700 focus:border-ambervu focus:outline-none px-4 py-3 rounded-sm font-mono text-sm text-stone-200 cursor-pointer"
+                class="w-full bg-stone-950 border border-khaki focus:border-ambervu focus:outline-none px-4 py-3 rounded-sm font-typewriter text-sm text-stone-200 cursor-pointer"
               >
                 <option value="">-- সঠিক সময় নির্বাচন করুন --</option>
                 <option value="01:30 AM">01:30 AM</option>
@@ -649,9 +685,9 @@
 
             <button
               type="submit"
-              class="w-full bg-crimson hover:bg-red-800 active:bg-red-900 text-parchment font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] py-3.5 px-5 rounded-sm transition-colors cursor-pointer shadow-lg"
+              class="w-full bg-crimson hover:bg-red-800 active:bg-red-900 border border-ambervu/50 text-parchment font-cinzel font-bold text-xs sm:text-sm uppercase tracking-[0.2em] py-3.5 px-5 rounded-sm transition-colors cursor-pointer shadow-lg"
             >
-              Submit Final Deduction
+              Submit Lalbazar Charge-Sheet
             </button>
           </form>
 
@@ -662,8 +698,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-stone-950 border-t border-stone-800 py-4 px-4 sm:px-6 text-center font-mono text-[11px] text-stone-500">
-      CONFIDENTIAL // AUDIO ARCHIVE KOLKATA — STUDIO 7 TOLLYGUNGE — ANALOG FORENSICS DIVISION
+    <footer class="bg-stone-950 border-t border-khaki/60 py-4 px-4 sm:px-6 text-center font-typewriter text-xs text-stone-400">
+      CONFIDENTIAL // CALCUTTA POLICE — LALBAZAR DETECTIVE DEPARTMENT — STUDIO 7 ARCHIVE
     </footer>
   </div>
 
@@ -678,12 +714,13 @@
   >
     <div
       id="evidence-modal-box"
-      class="modal-animate relative w-full max-w-4xl bg-console border border-stone-700 rounded-sm shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+      class="modal-animate relative w-full max-w-4xl bg-console border-2 border-khaki rounded-sm shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
     >
+      <div class="h-1.5 w-full lalbazar-stripe shrink-0"></div>
       <!-- Modal Header -->
       <div class="bg-stone-950 border-b border-stone-800 px-5 py-3.5 flex items-center justify-between gap-4 shrink-0">
         <div class="flex items-center gap-3 min-w-0">
-          <span id="modal-ev-id" class="font-mono text-xs bg-ambervu/20 border border-ambervu/60 text-amber-300 px-2 py-0.5 rounded-sm shrink-0">
+          <span id="modal-ev-id" class="font-typewriter text-xs bg-crimson text-parchment font-bold px-2.5 py-0.5 rounded-sm shrink-0">
             EV-01
           </span>
           <h3 id="modal-ev-title" class="font-bengali text-base sm:text-lg font-bold text-parchment truncate">
@@ -693,7 +730,7 @@
         <button
           id="close-modal-btn"
           type="button"
-          class="bg-stone-900 hover:bg-crimson text-stone-300 hover:text-white border border-stone-700 px-3 py-1.5 rounded-sm font-mono text-xs uppercase transition-colors cursor-pointer shrink-0"
+          class="bg-stone-900 hover:bg-crimson text-stone-200 hover:text-white border border-khaki px-3 py-1.5 rounded-sm font-typewriter text-xs font-bold uppercase transition-colors cursor-pointer shrink-0"
         >
           ESC / CLOSE
         </button>
@@ -722,6 +759,12 @@
         examinedFiles: new Set(),
         vaultUnlocked: false,
         caseSolved: false,
+        // Ambient Detective Tone & Haptics State
+        ambientEnabled: true,
+        ambientRunning: false,
+        ambientGain: null,
+        ambientTimer: null,
+        ambientNodes: [],
         // Audio Player State
         audioCtx: null,
         analyser: null,
@@ -743,17 +786,6 @@
       const EVIDENCE_FILES = [
         {
           id: 'EV-01',
-          code: 'AUDIO CONSOLE',
-          title: 'অ্যানালগ রিল-টু-রিল অডিও কনসোল',
-          subtitle: 'Interactive Reel-to-Reel Player (3 Master & Leak Tracks)',
-          tag: 'WEB AUDIO FORENSICS',
-          accent: 'amber',
-          isAudioConsole: true,
-          summary:
-            'স্টুডিও ৭ থেকে উদ্ধার হওয়া ৩টি অ্যানালগ টেপ রিল। সরাসরি প্লে করে এবং ফ্রিকোয়েন্সি অ্যানালাইজার চালিয়ে গোপন অডিও সূত্র ও ভল্ট কোড বের করুন।',
-        },
-        {
-          id: 'EV-02',
           code: 'WITNESS LOG',
           title: 'সিকিউরিটি গার্ড হরিপদ দার জবানবন্দি',
           subtitle: 'Night Shift Security Statement — Tollygunge Gate',
@@ -771,8 +803,8 @@
                 <span class="ink-stamp text-crimson text-[10px]">VERIFIED STATEMENT</span>
               </div>
               <div class="space-y-3.5 font-bengali text-sm sm:text-base leading-relaxed text-stone-800">
-                <p>“স্যার, আমি সন্ধ্যা ৭টা থেকে মেইন গেটেই ছিলাম। ডাঃ অন্তর্জিতা ম্যাডাম রাত ঠিক ৯:০০টায় গাড়ি নিয়ে বেরিয়ে যান। মালিকের ছেলে রাহুল বাবু সেদিন স্টুডিওতেই আসেননি—পরে শুনেছি পার্ক স্ট্রিটে পার্টিতে ছিলেন।”</p>
-                <p>“সৌম্যজিৎ বাবু রাত <strong>১:৩০টায়</strong> মেইন গেটের খাতায় সই করে বেরিয়ে যান। তবে স্যার, স্টুডিও রুম-বি-র পেছনের লোডিং করিডোর দিয়ে ভেতরে ঢোকার একটা পুরনো কাঠের দরজা আছে।”</p>
+                <p>“স্যার, আমি সন্ধ্যা ৭টা থেকে মেইন গেটেই ছিলাম। ডাঃ অন্তর্জিতা ম্যাডাম রাত ঠিক ৯:০০টায় গাড়ি নিয়ে বেরিয়ে যান। গায়িকা দেবযানী ম্যাডাম ও তন্ময় বাবু রাত ১১:০০টার মধ্যেই রেকর্ডিং সেরে চলে যান। মালিকের ছেলে রাহুল বাবু সেদিন স্টুডিওতেই আসেননি—পরে শুনেছি পার্ক স্ট্রিটে পার্টিতে ছিলেন।”</p>
+                <p>“সৌম্যজিৎ বাবু ও ঋত্বিক বাবু রাত <strong>১:৩০টায়</strong> মেইন গেটের খাতায় সই করে একসাথে বেরিয়ে যান। তবে স্যার, স্টুডিও রুম-বি-র পেছনের লোডিং করিডোর দিয়ে ভেতরে ঢোকার একটা পুরনো কাঠের দরজা আছে।”</p>
                 <div class="bg-amber-900/10 border-l-4 border-ambervu p-3.5 rounded-sm">
                   <p class="font-semibold text-stone-950">গুরুত্বপূর্ণ তথ্য (ব্ল্যাকআউট):</p>
                   <p>“রাত ঠিক <strong>২:০০ AM</strong> নাগাদ লোডশেডিং হওয়ায় জেনারেটর সুইচওভার করতে গিয়ে মেইন করিডোরে পুরো <strong>১৫ মিনিট (২:০০ AM থেকে ২:১৫ AM)</strong> সম্পূর্ণ অন্ধকার ছিল। ওই সময় ডিজিটাল কিকার্ড লগ সম্পূর্ণ বন্ধ হয়ে যায়।”</p>
@@ -786,7 +818,7 @@
           `,
         },
         {
-          id: 'EV-03',
+          id: 'EV-02',
           code: 'MAINTENANCE',
           title: 'স্টুডিও ইলেকট্রিশিয়ানের পুরনো রসিদ',
           subtitle: 'Electrical Maintenance Memo — Console Clock Fault',
@@ -819,7 +851,7 @@
           `,
         },
         {
-          id: 'EV-04',
+          id: 'EV-03',
           code: 'CRIME SCENE',
           title: 'থামে যাওয়া স্টুডিও কনসোল ঘড়ির ছবি',
           subtitle: 'Surge-Frozen Digital Wall Clock — Studio Room B',
@@ -862,7 +894,7 @@
           `,
         },
         {
-          id: 'EV-05',
+          id: 'EV-04',
           code: 'ENGINEER LOG',
           title: 'সাউন্ড ইঞ্জিনিয়ারের লগবুক',
           subtitle: 'Handwritten Studio Patch & Console Inspection Notes',
@@ -886,7 +918,7 @@
           `,
         },
         {
-          id: 'EV-06',
+          id: 'EV-05',
           code: 'UTILITY LOG',
           title: 'বিদ্যুৎ ও এসি বিলের রসিদ',
           subtitle: 'Studio Room B Power Load & Phantom Power Telemetry',
@@ -920,6 +952,17 @@
           `,
         },
         {
+          id: 'EV-06',
+          code: 'AUDIO CONSOLE',
+          title: 'অ্যানালগ রিল-টু-রিল অডিও কনসোল',
+          subtitle: 'Interactive Reel-to-Reel Player (3 Master & Leak Tracks)',
+          tag: 'WEB AUDIO FORENSICS',
+          accent: 'amber',
+          isAudioConsole: true,
+          summary:
+            'স্টুডিও ৭ থেকে উদ্ধার হওয়া ৩টি অ্যানালগ টেপ রিল। সরাসরি প্লে করে এবং ফ্রিকোয়েন্সি অ্যানালাইজার চালিয়ে গোপন অডিও সূত্র ও ভল্ট কোড বের করুন।',
+        },
+        {
           id: 'EV-07',
           code: 'TORN PAGE',
           title: 'অজ্ঞাতনামা নোটবুকের ছেঁড়া পাতা',
@@ -948,7 +991,7 @@
       ];
 
       /* ------------------------------------------------------------------- */
-      /* SUSPECTS DATABASE (5 DISTINCT PROFILES)                             */
+      /* SUSPECTS DATABASE (8 DISTINCT PROFILES)                             */
       /* ------------------------------------------------------------------- */
       const SUSPECTS = [
         {
@@ -965,7 +1008,7 @@
           id: 'SUS-02',
           name: 'ডাঃ অন্তর্জিতা মাইতি',
           role: 'ভয়েস থেরাপিস্ট ও অ্যাকোস্টিক কনসালট্যান্ট',
-          alibi: 'গায়কের গলার চিকিৎসার জন্য সন্ধ্যেয় এসেছিলেন, কিন্তু রাত ৯:০০টায় স্টুডিও ছেড়ে বাড়ি ফিরে যান (গেট লগ ও সিসিটিভি প্রমাণিত)।',
+          alibi: 'গায়িকার গলার চিকিৎসার জন্য সন্ধ্যেয় এসেছিলেন, কিন্তু রাত ৯:০০টায় স্টুডিও ছেড়ে বাড়ি ফিরে যান (গেট লগ ও সিসিটিভি প্রমাণিত)।',
           motive: 'মাস্টার ট্র্যাক নষ্ট করার কোনো ব্যক্তিগত বা আর্থিক স্বার্থ নেই।',
           notes: 'রাত ৯টার পর স্টুডিও চত্বরে ফেরেননি।',
           status: 'CLEARED',
@@ -977,19 +1020,19 @@
           role: 'রেকর্ড লেবেল ম্যানেজার (সুরধ্বনি রেকর্ডস)',
           alibi: 'রাত ১১:৩০টায় অফিস থেকে বাড়ি ফিরে যান বলে দাবি।',
           motive: 'তিনি গানটি যত দ্রুত সম্ভব বাজারে রিলিজ করতে চাইছিলেন—মাস্টার ট্র্যাক মুছে ফেললে তাঁর লেবেলেরই সবচেয়ে বড় আর্থিক ক্ষতি।',
-          notes: 'অ্যালবামের ক্রেডিট ও রয়্যালটি চুক্তি চূড়ান্ত করার দায়িত্বে ছিলেন।',
+          notes: 'অ্যালবামের ₹১,০০,০০০ সেশন-ফি ও ক্রেডিট চুক্তি চূড়ান্ত করার দায়িত্বে ছিলেন।',
           status: 'LOW MOTIVE',
           statusColor: 'text-amber-300 border-amber-700/60 bg-amber-950/30',
         },
         {
           id: 'SUS-04',
           name: 'সৌম্যজিৎ শেখর সাহা',
-          role: 'কো-প্রডিউসার ও সেশন গিটারিস্ট (বাঁ-হাতি)',
-          alibi: 'দাবি করেন রাত ১:৩০টায় স্টুডিও থেকে বেরিয়ে গেছেন — কিন্তু ১:৩০টার পর তাঁর বাড়িতে পৌঁছানোর কোনো নিরপেক্ষ প্রমাণ নেই।',
-          motive: 'গানটির মূল সুর ও অ্যাকোস্টিক অ্যারেঞ্জমেন্ট তৈরি করেছিলেন, কিন্তু গোপন লেবেল চুক্তিতে তাঁর নাম ও রয়্যালটি বাদ দেওয়া হচ্ছিল।',
-          notes: 'অ্যাকোস্টিক-ইলেকট্রনিক হাইব্রিড রাউটিংয়ে দক্ষ; ৪৩২ হার্জ টিউনিংয়ে বাঁ-হাতি অ্যাকোস্টিক গিটার বাজান।',
-          status: 'UNDER SCRUTINY',
-          statusColor: 'text-red-400 border-crimson bg-crimson/15',
+          role: 'কো-প্রডিউসার ও লিড সেশন মিউজিশিয়ান',
+          alibi: 'রাত ১:৩০টায় মেইন গেটে সাইন-আউট করে বাড়ি ফিরে যান — আবাসনের নাইট গার্ড রাত ২:১০-এ তাঁকে বাড়িতে ঢুকতে দেখেছেন।',
+          motive: 'গোপন ভল্টের চুক্তি অনুযায়ী তিনিই অ্যালবামের সম্পূর্ণ ₹১,০০,০০০ সেশন-ফি ও প্রধান ক্রেডিট পাচ্ছেন, তাই তাঁর ট্র্যাক মোছার কোনো কারণ নেই।',
+          notes: 'ডান-হাতি মিউজিশিয়ান; স্ট্যান্ডার্ড ৪৪০ হার্জ টিউনিং ব্যবহার করেন।',
+          status: 'BENEFICIARY',
+          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
         },
         {
           id: 'SUS-05',
@@ -997,9 +1040,39 @@
           role: 'নাইট সিকিউরিটি গার্ড',
           alibi: 'রাত ২:০০টায় জেনারেটর সুইচওভারের সময় মেইন গেট ও জেনারেটর রুমে ছিলেন।',
           motive: 'স্টুডিওর প্রতি অনুগত; মাস্টার টেপ মোছার কোনো উদ্দেশ্য বা প্রযুক্তিগত দক্ষতা নেই।',
-          notes: 'জেনারেটর ব্ল্যাকআউট ও সৌম্যজিতের ১:৩০ AM-এর সাইন-আউটের প্রত্যক্ষদর্শী।',
+          notes: 'জেনারেটর ব্ল্যাকআউট ও রাত ১:৩০ AM-এর সাইন-আউটের প্রত্যক্ষদর্শী।',
           status: 'WITNESS',
           statusColor: 'text-stone-300 border-stone-600 bg-stone-900',
+        },
+        {
+          id: 'SUS-06',
+          name: 'দেবযানী সেনগুপ্ত',
+          role: 'লিড ভোকালিস্ট ও গীতিকার',
+          alibi: 'রাত ১১:০০টায় নিজের ভোকাল টেক শেষ করে স্টুডিও থেকে বেরিয়ে যান এবং ফোনে লাইভ রেডিও ইন্টারভিউয়ে যুক্ত ছিলেন।',
+          motive: 'এটি তাঁর ক্যারিয়ারের প্রথম বড় অ্যালবাম রিলিজ; মাস্টার টেপ মুছে গেলে তাঁরই সবচেয়ে বড় ক্ষতি।',
+          notes: 'গিটার বাজাতে বা স্টুডিও কনসোল অপারেট করতে জানেন না।',
+          status: 'ALIBI VERIFIED',
+          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
+        },
+        {
+          id: 'SUS-07',
+          name: 'ঋত্বিক চ্যাটার্জী',
+          role: 'অ্যাকোস্টিক রিদম গিটারিস্ট ও সাউন্ড অ্যারেঞ্জার (বাঁ-হাতি)',
+          alibi: 'সৌম্যজিতের সাথে রাত ১:৩০টায় মেইন গেটে সই করে বেরিয়ে যাওয়ার ভান করেন, কিন্তু ১:৩০টার পর তাঁর অবস্থানের কোনো প্রমাণ নেই।',
+          motive: 'অ্যালবামের মূল অ্যাকোস্টিক রিদম ও সুর সাজানো সত্ত্বেও গোপন চুক্তিতে তাঁকে বাদ দিয়ে পুরো ₹১,০০,০০০ সেশন-ফি সৌম্যজিৎকে দেওয়া হচ্ছিল।',
+          notes: 'বাঁ-হাতি গিটারিস্ট; ৪৩২ হার্জ টিউনিং ও অ্যানালগ-টু-ডিজিটাল হাইব্রিড প্যাচ রাউটিংয়ে বিশেষজ্ঞ।',
+          status: 'UNDER SCRUTINY',
+          statusColor: 'text-red-400 border-crimson bg-crimson/15',
+        },
+        {
+          id: 'SUS-08',
+          name: 'তন্ময় গাঙ্গুলী',
+          role: 'তবলা ও অ্যাকোস্টিক পারকাশনিস্ট',
+          alibi: 'রাত ১১:০০টায় দেবযানীর সাথে স্টুডিও ছেড়ে হাওড়া স্টেশন থেকে রাত ১১:৪৫-এর ট্রেন ধরেন (টিকিট ও সহযাত্রীদের দ্বারা প্রমাণিত)।',
+          motive: 'তাঁর পারকাশন সেশনের পারিশ্রমিক আগেই মিটিয়ে দেওয়া হয়েছিল।',
+          notes: 'অ্যানালগ কনসোল বা ইলেকট্রনিক প্যাচ কেবল সম্পর্কে কোনো ধারণা নেই।',
+          status: 'CLEARED',
+          statusColor: 'text-emerald-400 border-emerald-700/60 bg-emerald-950/30',
         },
       ];
 
@@ -1072,97 +1145,160 @@
         }
       }
 
-      // Creates analog tape hiss buffer
-      function createTapeHiss(ctx, duration, level = 0.025) {
-        const sampleRate = ctx.sampleRate;
-        const length = Math.floor(sampleRate * duration);
-        const buffer = ctx.createBuffer(1, length, sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < length; i++) {
-          data[i] = (Math.random() * 2 - 1) * level;
+      // Tactile Vibration Haptics Helper
+      function triggerHaptic(pattern = 15) {
+        try {
+          if (navigator && typeof navigator.vibrate === 'function') {
+            navigator.vibrate(pattern);
+          }
+        } catch (err) {
+          // Ignore unsupported environments
         }
-        const source = ctx.createBufferSource();
-        source.buffer = buffer;
-
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.value = 1800;
-        filter.Q.value = 0.7;
-
-        source.connect(filter);
-        filter.connect(state.masterGain);
-        source.start(ctx.currentTime);
-        state.activeNodes.push(source);
-        return source;
       }
 
-      // Synthesizes a warm acoustic piano note using additive harmonics
-      function playPianoNote(ctx, freq, startTime, duration, velocity = 0.16) {
-        const harmonics = [
-          { mult: 1, amp: 1.0, type: 'triangle' },
-          { mult: 2, amp: 0.42, type: 'sine' },
-          { mult: 3, amp: 0.16, type: 'sine' },
-        ];
-        harmonics.forEach((h) => {
-          const osc = ctx.createOscillator();
+      // Crisp 1990s Analog Console / Typewriter Mechanical Click Sound
+      function playMechanicalClick(pitch = 950) {
+        try {
+          ensureAudioContext();
+          const ctx = state.audioCtx;
+          const now = ctx.currentTime;
+
+          // Short filtered noise burst + crisp transient click
+          const bufferSize = Math.floor(ctx.sampleRate * 0.022);
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.28));
+          }
+
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(pitch, now);
+          filter.Q.setValueAtTime(2.2, now);
+
           const gain = ctx.createGain();
-          osc.type = h.type;
-          osc.frequency.setValueAtTime(freq * h.mult, startTime);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.022);
 
-          gain.gain.setValueAtTime(0.0001, startTime);
-          gain.gain.linearRampToValueAtTime(velocity * h.amp, startTime + 0.018);
-          gain.gain.exponentialRampToValueAtTime(0.0008, startTime + duration);
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+          noise.start(now);
+        } catch (err) {
+          // Ignore gesture restrictions
+        }
+      }
 
-          osc.connect(gain);
-          gain.connect(state.masterGain);
-          osc.start(startTime);
-          osc.stop(startTime + duration + 0.05);
-          state.activeNodes.push(osc);
+      // Mild 1990s Kolkata Detective Noir Background Score (Warm D-Minor Pad + Soft Electric Piano Motif)
+      function startDetectiveAmbient() {
+        if (!state.ambientEnabled || state.ambientRunning) return;
+        try {
+          ensureAudioContext();
+          const ctx = state.audioCtx;
+          state.ambientRunning = true;
+
+          const ambGain = ctx.createGain();
+          ambGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          ambGain.gain.linearRampToValueAtTime(state.isPlaying ? 0.0001 : 0.055, ctx.currentTime + 1.8);
+          ambGain.connect(ctx.destination);
+          state.ambientGain = ambGain;
+
+          // Warm low-pass filter for cozy vintage noir atmosphere
+          const lpFilter = ctx.createBiquadFilter();
+          lpFilter.type = 'lowpass';
+          lpFilter.frequency.setValueAtTime(480, ctx.currentTime);
+          lpFilter.connect(ambGain);
+
+          // Subtle continuous D2 + A2 warm analog drone
+          [73.42, 110.0].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = i === 0 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            g.gain.setValueAtTime(i === 0 ? 0.28 : 0.12, ctx.currentTime);
+            osc.connect(g);
+            g.connect(lpFilter);
+            osc.start();
+            state.ambientNodes.push(osc);
+          });
+
+          // Gentle mysterious detective motif loop (Dm9: D3, F3, A3, E4, C4)
+          const motif = [
+            { f: 146.83, d: 2.6 }, // D3
+            { f: 174.61, d: 2.4 }, // F3
+            { f: 220.00, d: 2.6 }, // A3
+            { f: 329.63, d: 3.0 }, // E4
+            { f: 261.63, d: 2.8 }, // C4
+            { f: 220.00, d: 3.2 }, // A3
+          ];
+          let step = 0;
+
+          const playMotifStep = () => {
+            if (!state.ambientRunning || !state.ambientEnabled) return;
+            const note = motif[step % motif.length];
+            step++;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const noteGain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(note.f, now);
+
+            noteGain.gain.setValueAtTime(0.0001, now);
+            noteGain.gain.linearRampToValueAtTime(0.18, now + 0.35);
+            noteGain.gain.exponentialRampToValueAtTime(0.0008, now + note.d);
+
+            osc.connect(noteGain);
+            noteGain.connect(lpFilter);
+            osc.start(now);
+            osc.stop(now + note.d + 0.1);
+            state.ambientNodes.push(osc);
+
+            state.ambientTimer = setTimeout(playMotifStep, 2800);
+          };
+
+          playMotifStep();
+        } catch (err) {
+          state.ambientRunning = false;
+        }
+      }
+
+      function stopDetectiveAmbient() {
+        state.ambientRunning = false;
+        if (state.ambientTimer) {
+          clearTimeout(state.ambientTimer);
+          state.ambientTimer = null;
+        }
+        state.ambientNodes.forEach((n) => {
+          try {
+            n.stop();
+            n.disconnect();
+          } catch (e) {}
         });
+        state.ambientNodes = [];
+        state.ambientGain = null;
       }
 
-      // Track 01: Haunting A Minor (A - C - E - G) Acoustic Piano Progression + Gentle Studio Pulse
-      function synthesizeTrack1() {
-        const ctx = state.audioCtx;
-        const now = ctx.currentTime + 0.05;
-        createTapeHiss(ctx, 10.5, 0.022);
+      // Smoothly ducks ambient tone when forensic audio tracks play
+      function setAmbientDucking(duck) {
+        if (!state.ambientGain || !state.audioCtx) return;
+        const now = state.audioCtx.currentTime;
+        state.ambientGain.gain.cancelScheduledValues(now);
+        state.ambientGain.gain.setTargetAtTime(duck ? 0.0001 : 0.055, now, 0.25);
+      }
 
-        // A Minor 7 arpeggiated & sustained progression (A3=220, C4=261.63, E4=329.63, G4=392.00)
-        const melody = [
-          { f: 220.0, t: 0.0, d: 2.2 },   // A3
-          { f: 261.63, t: 0.55, d: 1.9 }, // C4
-          { f: 329.63, t: 1.1, d: 1.8 },  // E4
-          { f: 392.0, t: 1.65, d: 2.2 },  // G4
-          { f: 329.63, t: 2.4, d: 1.6 },  // E4
-          { f: 261.63, t: 3.0, d: 1.8 },  // C4
-          // Second bar with deep A2 bass
-          { f: 110.0, t: 4.0, d: 3.0 },   // A2 bass
-          { f: 220.0, t: 4.0, d: 2.0 },   // A3
-          { f: 261.63, t: 4.6, d: 1.8 },  // C4
-          { f: 329.63, t: 5.2, d: 1.8 },  // E4
-          { f: 392.0, t: 5.8, d: 2.4 },   // G4
-          { f: 440.0, t: 6.8, d: 2.5 },   // A4
-          { f: 329.63, t: 7.6, d: 2.2 },  // E4
-          { f: 220.0, t: 8.3, d: 2.0 },   // A3
-        ];
-
-        melody.forEach((n) => playPianoNote(ctx, n.f, now + n.t, n.d, 0.14));
-
-        // Soft studio rhythmic brush/metronome pulse
-        for (let beat = 0; beat < 16; beat++) {
-          const bt = now + beat * 0.62;
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(beat % 4 === 0 ? 115 : 85, bt);
-          osc.frequency.exponentialRampToValueAtTime(38, bt + 0.09);
-          gain.gain.setValueAtTime(beat % 4 === 0 ? 0.12 : 0.06, bt);
-          gain.gain.exponentialRampToValueAtTime(0.001, bt + 0.11);
-          osc.connect(gain);
-          gain.connect(state.masterGain);
-          osc.start(bt);
-          osc.stop(bt + 0.12);
-          state.activeNodes.push(osc);
+      function updateAmbientButtonUI() {
+        const led = document.getElementById('ambient-led');
+        const label = document.getElementById('ambient-label');
+        if (!led || !label) return;
+        if (state.ambientEnabled) {
+          led.className = 'w-2 h-2 rounded-full bg-ambervu led-pulse text-ambervu';
+          label.textContent = 'BGM: ON';
+        } else {
+          led.className = 'w-2 h-2 rounded-full bg-stone-600';
+          label.textContent = 'BGM: OFF';
         }
       }
 
@@ -1312,6 +1448,7 @@
         });
         state.activeNodes = [];
         state.isPlaying = false;
+        setAmbientDucking(false);
         if (state.trackTimer) {
           clearTimeout(state.trackTimer);
           state.trackTimer = null;
@@ -1333,6 +1470,7 @@
 
           state.currentTrackId = trackId;
           state.isPlaying = true;
+          setAmbientDucking(true);
           state.trackStartTime = performance.now();
           state.trackDuration = track.duration;
 
@@ -1673,66 +1811,64 @@
           return `
             <article
               data-ev-id="${ev.id}"
-              class="evidence-card group relative cursor-pointer rounded-sm border transition-all duration-200 flex flex-col justify-between p-5 ${
-                isAudio
-                  ? 'bg-console border-ambervu/70 hover:border-amber-400 shadow-[0_0_24px_rgba(217,119,6,0.12)]'
-                  : 'bg-parchment text-stone-900 border-stone-500 hover:border-ambervu hover:-translate-y-0.5 shadow-lg'
+              class="evidence-card group relative cursor-pointer rounded-sm border-2 transition-all duration-200 flex flex-col justify-between p-5 ${
+                isExamined
+                  ? 'bg-console border-ambervu/80 hover:border-amber-400 shadow-xl'
+                  : 'manila-folder border-khaki hover:border-crimson hover:-translate-y-0.5'
               }"
             >
               <div>
-                <div class="flex items-center justify-between gap-2 mb-3">
-                  <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded-sm ${
-                    isAudio
-                      ? 'bg-ambervu text-stone-950'
-                      : 'bg-stone-900 text-parchment'
-                  }">
-                    ${ev.id}
-                  </span>
-                  <span class="font-mono text-[10px] uppercase tracking-wider ${
+                <div class="flex items-center justify-between gap-2 mb-3 pb-2 border-b ${
+                  isExamined ? 'border-stone-800' : 'border-stone-400/70'
+                }">
+                  <span class="font-typewriter text-xs font-bold px-2.5 py-0.5 rounded-sm ${
                     isExamined
-                      ? isAudio
-                        ? 'text-emerald-400'
-                        : 'text-emerald-800 font-bold'
-                      : isAudio
-                      ? 'text-amber-300'
-                      : 'text-crimson font-semibold'
+                      ? 'bg-ambervu text-stone-950'
+                      : 'bg-crimson text-parchment'
                   }">
-                    ${isExamined ? '✓ EXAMINED' : ev.tag}
+                    EXHIBIT ${ev.id}
+                  </span>
+                  <span class="font-typewriter text-[11px] uppercase tracking-wider font-bold ${
+                    isExamined
+                      ? 'text-emerald-400'
+                      : 'text-crimson'
+                  }">
+                    ${isExamined ? '✓ VERIFIED' : ev.tag}
                   </span>
                 </div>
 
-                <h3 class="font-bengali text-lg font-bold leading-snug ${
-                  isAudio ? 'text-parchment' : 'text-stone-950'
+                <h3 class="font-bengali text-lg font-extrabold leading-snug ${
+                  isExamined ? 'text-parchment' : 'text-stone-950'
                 }">
                   ${ev.title}
                 </h3>
-                <p class="font-mono text-[11px] mt-1 ${
-                  isAudio ? 'text-amber-400/90' : 'text-stone-600'
+                <p class="font-typewriter text-xs mt-1 ${
+                  isExamined ? 'text-amber-400/90' : 'text-stone-700'
                 }">
                   ${ev.subtitle}
                 </p>
 
                 <p class="font-bengali text-xs sm:text-sm mt-3 leading-relaxed ${
-                  isAudio ? 'text-stone-300' : 'text-stone-700'
+                  isExamined ? 'text-stone-300' : 'text-stone-800'
                 }">
                   ${ev.summary}
                 </p>
               </div>
 
               <div class="mt-4 pt-3 border-t flex items-center justify-between ${
-                isAudio ? 'border-stone-800' : 'border-stone-300'
+                isExamined ? 'border-stone-800' : 'border-stone-400/70'
               }">
-                <span class="font-mono text-[10px] uppercase tracking-wider ${
-                  isAudio ? 'text-stone-400' : 'text-stone-600'
+                <span class="font-typewriter text-[11px] uppercase tracking-wider font-bold ${
+                  isExamined ? 'text-stone-400' : 'text-stone-700'
                 }">
-                  ${isAudio ? '3 AUDIO TRACKS READY' : 'ARCHIVE FILE'}
+                  ${isAudio ? 'LALBAZAR AUDIO LAB' : 'SEIZED RECORD'}
                 </span>
-                <span class="font-mono text-xs font-bold flex items-center gap-1 ${
-                  isAudio
+                <span class="font-typewriter text-xs font-bold flex items-center gap-1 ${
+                  isExamined
                     ? 'text-ambervu group-hover:translate-x-0.5 transition-transform'
                     : 'text-crimson group-hover:translate-x-0.5 transition-transform'
                 }">
-                  ${isAudio ? 'OPEN CONSOLE →' : 'INSPECT →'}
+                  ${isAudio ? 'OPEN CONSOLE →' : 'OPEN DOSSIER →'}
                 </span>
               </div>
             </article>
@@ -1741,7 +1877,11 @@
 
         // Attach click listeners
         document.querySelectorAll('.evidence-card').forEach((card) => {
-          card.addEventListener('click', () => openEvidenceModal(card.dataset.evId));
+          card.addEventListener('click', () => {
+            playMechanicalClick(820);
+            triggerHaptic(18);
+            openEvidenceModal(card.dataset.evId);
+          });
         });
       }
 
@@ -1749,32 +1889,33 @@
         const grid = document.getElementById('suspects-grid');
         grid.innerHTML = SUSPECTS.map(
           (sus) => `
-          <article class="bg-console border border-stone-800 hover:border-stone-600 rounded-sm p-5 transition-colors flex flex-col justify-between">
+          <article class="bg-console border-2 border-khaki/80 hover:border-ambervu/70 rounded-sm p-5 transition-colors flex flex-col justify-between shadow-lg">
             <div>
               <div class="flex flex-wrap items-start justify-between gap-2 border-b border-stone-800 pb-3 mb-3">
                 <div class="flex items-center gap-3">
-                  <div class="w-11 h-11 rounded-sm bg-stone-950 border border-stone-700 flex items-center justify-center font-mono text-xs font-bold text-ambervu shrink-0">
-                    ${sus.id}
+                  <div class="w-12 h-12 rounded-sm bg-stone-950 border border-ambervu/60 flex flex-col items-center justify-center font-typewriter text-xs font-bold text-ambervu shrink-0">
+                    <span class="text-[9px] text-stone-500">FILE</span>
+                    <span>${sus.id}</span>
                   </div>
                   <div>
-                    <h3 class="font-bengali text-lg font-bold text-parchment">${sus.name}</h3>
-                    <p class="font-bengali text-xs text-amber-400/90">${sus.role}</p>
+                    <h3 class="font-bengali text-lg font-extrabold text-parchment">${sus.name}</h3>
+                    <p class="font-bengali text-xs text-amber-400 font-semibold">${sus.role}</p>
                   </div>
                 </div>
-                <span class="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-sm border ${sus.statusColor}">
+                <span class="font-typewriter text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-sm border ${sus.statusColor}">
                   ${sus.status}
                 </span>
               </div>
 
               <div class="space-y-2.5 font-bengali text-xs sm:text-sm leading-relaxed">
-                <p class="text-stone-300">
-                  <strong class="text-parchment">অ্যালিবাই (Alibi):</strong> ${sus.alibi}
+                <p class="text-stone-200">
+                  <strong class="text-amber-200">অ্যালিবাই (Alibi):</strong> ${sus.alibi}
                 </p>
-                <p class="text-stone-300">
-                  <strong class="text-parchment">সম্ভাব্য উদ্দেশ্য (Motive):</strong> ${sus.motive}
+                <p class="text-stone-200">
+                  <strong class="text-amber-200">সম্ভাব্য উদ্দেশ্য (Motive):</strong> ${sus.motive}
                 </p>
-                <p class="text-stone-400 bg-stone-950/80 border border-stone-800 p-2.5 rounded-sm">
-                  <strong class="text-amber-300 font-mono text-[11px] uppercase">Field Note:</strong> ${sus.notes}
+                <p class="text-stone-300 bg-stone-950 border border-khaki/60 p-2.5 rounded-sm">
+                  <strong class="text-ambervu font-typewriter text-xs uppercase">Lalbazar Note:</strong> ${sus.notes}
                 </p>
               </div>
             </div>
@@ -1868,8 +2009,8 @@
         document.querySelectorAll('.tab-btn').forEach((btn) => {
           const isActive = btn.dataset.tab === tabName;
           btn.className = isActive
-            ? 'tab-btn shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-sm font-bengali text-sm font-semibold border transition-all cursor-pointer bg-ambervu/15 border-ambervu text-amber-300'
-            : 'tab-btn shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-sm font-bengali text-sm font-semibold border border-stone-800 text-stone-400 hover:text-stone-200 hover:border-stone-600 transition-all cursor-pointer';
+            ? 'tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-t-sm font-bengali text-sm font-bold border-t-2 border-x transition-all cursor-pointer bg-console border-ambervu text-amber-300'
+            : 'tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-t-sm font-bengali text-sm font-bold border-t-2 border-x border-transparent text-stone-400 hover:text-stone-200 hover:bg-stone-900/60 transition-all cursor-pointer';
         });
       }
 
@@ -1877,6 +2018,29 @@
       /* EVENT LISTENERS & INITIALIZATION                                    */
       /* ------------------------------------------------------------------- */
       window.addEventListener('DOMContentLoaded', () => {
+        // Global Tactile Button Click Sound & Micro-Haptics
+        document.addEventListener('click', (e) => {
+          const btn = e.target.closest('button, select');
+          if (btn && !btn.classList.contains('vault-key')) {
+            playMechanicalClick(980);
+            triggerHaptic(12);
+          }
+        });
+
+        // Ambient Detective Tone Toggle Button
+        const ambientToggleBtn = document.getElementById('ambient-toggle-btn');
+        if (ambientToggleBtn) {
+          ambientToggleBtn.addEventListener('click', () => {
+            state.ambientEnabled = !state.ambientEnabled;
+            updateAmbientButtonUI();
+            if (state.ambientEnabled) {
+              startDetectiveAmbient();
+            } else {
+              stopDetectiveAmbient();
+            }
+          });
+        }
+
         // 1. Login Handler (admin / 123)
         const loginForm = document.getElementById('login-form');
         const loginError = document.getElementById('login-error');
@@ -1885,6 +2049,7 @@
           document.getElementById('agent-id').value = 'admin';
           document.getElementById('agent-passcode').value = '123';
           loginError.classList.add('hidden');
+          triggerHaptic([15, 30, 15]);
           playSystemTone(520, 0.08);
         });
 
@@ -1896,13 +2061,18 @@
           if (agentId === 'admin' && passcode === '123') {
             loginError.classList.add('hidden');
             state.authenticated = true;
+            triggerHaptic([25, 40, 25]);
             playSystemTone(587.33, 0.14);
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('dashboard-screen').classList.remove('hidden');
             renderEvidenceGrid();
             renderSuspectsGrid();
+            if (state.ambientEnabled) {
+              startDetectiveAmbient();
+            }
           } else {
             loginError.classList.remove('hidden');
+            triggerHaptic([60, 40, 60]);
             playSystemTone(180, 0.2, 'sawtooth');
           }
         });
@@ -1910,6 +2080,7 @@
         // Logout / Lock Terminal
         document.getElementById('logout-btn').addEventListener('click', () => {
           stopCurrentAudio();
+          stopDetectiveAmbient();
           state.authenticated = false;
           document.getElementById('agent-id').value = '';
           document.getElementById('agent-passcode').value = '';
@@ -1939,6 +2110,7 @@
           keyBtn.addEventListener('click', () => {
             if (vaultInput.value.length < 4) {
               vaultInput.value += keyBtn.dataset.key;
+              triggerHaptic(14);
               playSystemTone(440 + Number(keyBtn.dataset.key) * 35, 0.06);
             }
           });
@@ -1959,9 +2131,11 @@
             const tabBadge = document.getElementById('vault-tab-status');
             tabBadge.textContent = 'OPEN';
             tabBadge.className = 'font-mono text-[10px] bg-emerald-900/50 text-emerald-300 px-1.5 py-0.5 rounded-sm';
+            triggerHaptic([30, 50, 40]);
             playSystemTone(784, 0.18);
           } else {
             vaultError.classList.remove('hidden');
+            triggerHaptic([70, 50, 70]);
             playSystemTone(190, 0.22, 'sawtooth');
           }
         });
@@ -1975,7 +2149,7 @@
           const resultBox = document.getElementById('verdict-result');
 
           const isCorrect =
-            culprit === 'সৌম্যজিৎ শেখর সাহা' &&
+            culprit === 'ঋত্বিক চ্যাটার্জী' &&
             method === '৪৩২ হার্জ টিউনিং ও অ্যানালগ কনসোল ওভাররাইড' &&
             time === '03:05 AM';
 
@@ -1983,6 +2157,7 @@
 
           if (isCorrect) {
             state.caseSolved = true;
+            triggerHaptic([40, 60, 40, 60, 90]);
             playSystemTone(659.25, 0.22);
 
             // Update Header Status Badge
@@ -2002,11 +2177,12 @@
                   অভিনন্দন! স্টুডিও ৭-এর রহস্য সফলভাবে উদঘাটিত হয়েছে।
                 </h3>
                 <p class="font-bengali text-sm text-stone-800 leading-relaxed">
-                  রেকর্ড লেবেলের গোপন চুক্তিতে নিজের নাম ও রয়্যালটি বাদ পড়ার খবর জেনে কো-প্রডিউসার <strong>সৌম্যজিৎ শেখর সাহা</strong> রাত ১:৩০টায় মেইন গেটে সাইন-আউট করে অ্যালিবাই তৈরি করেন। এরপর রাত ২:০০টার জেনারেটর সুইচওভার ব্ল্যাকআউটের সুযোগে স্টুডিও রুম-বি-তে ফিরে এসে কাস্টম প্যাচ কেবলের মাধ্যমে অ্যানালগ কনসোল ওভাররাইড করে মাস্টার ট্র্যাকটি মুছে ফেলেন। ১৫ মিনিট পিছিয়ে থাকা কনসোল ঘড়িটি ২:৫০ AM-এ সার্জে থেমে যাওয়ায় প্রকৃত সময় দাঁড়ায় <strong>০৩:০৫ AM</strong>—যা তাঁর ৪৩২ হার্জ গিটার প্লাকের অ্যাম্বিয়েন্ট লিক ও এসি বিলের সঙ্গে শতভাগ মিলে যায়।
+                  গোপন ভল্টের চুক্তিপত্রে দেখা যায়, অ্যালবামের সম্পূর্ণ <strong>₹১,০০,০০০ সেশন-ফি ও ক্রেডিট</strong> শুধুমাত্র <strong>সৌম্যজিৎ শেখর সাহা</strong>-কে দেওয়া হচ্ছিল, আর মূল অ্যাকোস্টিক রিদম ও সুর সাজানো <strong>ঋত্বিক চ্যাটার্জী</strong>-কে সম্পূর্ণ বঞ্চিত করা হচ্ছিল। এই ক্ষোভ থেকেই বাঁ-হাতি গিটারিস্ট ঋত্বিক চ্যাটার্জী রাত ১:৩০টায় সৌম্যজিতের সাথে বেরিয়ে যাওয়ার ভান করেন এবং রাত ২:০০টার জেনারেটর সুইচওভার ব্ল্যাকআউটের সুযোগে পেছনের দরজা দিয়ে স্টুডিও রুম-বি-তে ফিরে আসেন। এরপর কাস্টম প্যাচ কেবলের মাধ্যমে অ্যানালগ কনসোল ওভাররাইড করে মাস্টার ট্র্যাকটি মুছে ফেলেন। ১৫ মিনিট পিছিয়ে থাকা কনসোল ঘড়িটি ২:৫০ AM-এ সার্জে থেমে যাওয়ায় প্রকৃত সময় দাঁড়ায় <strong>০৩:০৫ AM</strong>—যা তাঁর ৪৩২ হার্জ গিটার প্লাকের অ্যাম্বিয়েন্ট লিক, বাঁ-হাতি গিটার পিক ও এসি বিলের সঙ্গে শতভাগ মিলে যায়।
                 </p>
               </div>
             `;
           } else {
+            triggerHaptic([80, 60, 80]);
             playSystemTone(170, 0.25, 'sawtooth');
             resultBox.innerHTML = `
               <div class="bg-crimson/15 border border-crimson rounded-sm p-5 text-center sm:text-left">
