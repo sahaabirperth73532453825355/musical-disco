@@ -263,8 +263,18 @@
         </form>
 
         <!-- Public Archive Access Info -->
-        <div class="mt-4 bg-stone-950/80 border border-stone-800 px-3 py-2 rounded-sm text-center font-mono text-[11px] text-stone-400">
-          ACCESS CREDENTIALS — ID: <span class="text-ambervu font-semibold">admin</span> | PASSCODE: <span class="text-ambervu font-semibold">123</span>
+        <div class="mt-4 bg-stone-950/80 border border-stone-800 px-3 py-2 rounded-sm flex items-center justify-between gap-2 font-mono text-[11px] text-stone-400">
+          <span>
+            ID: <span class="text-ambervu font-semibold">admin</span> | PASS: <span class="text-ambervu font-semibold">123</span>
+          </span>
+          <button
+            id="autofill-login-btn"
+            type="button"
+            title="Auto-fill credentials"
+            class="bg-stone-900 hover:bg-ambervu hover:text-stone-950 border border-stone-700 hover:border-ambervu text-ambervu px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+          >
+            AUTO-FILL
+          </button>
         </div>
 
         <!-- Footer Archive Seal -->
@@ -550,7 +560,7 @@
                 <div class="bg-red-900/10 border-l-4 border-crimson p-4 rounded-sm">
                   <p class="font-bold text-crimson mb-1">বিশেষ সংশোধনী (গোপন সংযোজন — চূড়ান্ত মুদ্রণের পূর্বে):</p>
                   <p>
-                    কো-প্রডিউসার ও সেশন গিটারিস্ট <strong class="underline decoration-crimson decoration-2">সৌম্যজিৎ শেখর সাহা</strong>-কে কেবল এককালীন সেশন-ফি (₹৪,৫০০) প্রদান করা হবে। অ্যালবামের কভার, ক্যাসেট ইনলে-কার্ড এবং সমস্ত ভবিষ্যৎ রয়্যালটি তালিকা থেকে <strong>তাঁর নাম সম্পূর্ণভাবে বাদ দেওয়া হলো</strong>। গানটির মূল অ্যাকোস্টিক সুর ও ৪৩২ হার্জ গিটার অ্যারেঞ্জমেন্ট লেবেলের একক সম্পত্তি হিসেবে গণ্য হবে।
+                    কো-প্রডিউসার ও সেশন গিটারিস্ট <strong class="underline decoration-crimson decoration-2">সৌম্যজিৎ শেখর সাহা</strong>-কে কেবল এককালীন সেশন-ফি (₹৪,৫০০) এবং অ্যাকোস্টিক কনসালট্যান্ট <strong>ডাঃ অন্তর্জিতা মাইতি</strong>-কে এককালীন কনসালট্যান্সি-ফি (₹১,০০০) প্রদান করা হবে। অ্যালবামের কভার, ক্যাসেট ইনলে-কার্ড এবং সমস্ত ভবিষ্যৎ রয়্যালটি তালিকা থেকে <strong>তাঁদের নাম সম্পূর্ণভাবে বাদ দেওয়া হলো</strong>। গানটির মূল অ্যাকোস্টিক সুর ও ৪৩২ হার্জ গিটার অ্যারেঞ্জমেন্ট লেবেলের একক সম্পত্তি হিসেবে গণ্য হবে।
                   </p>
                 </div>
                 <p class="font-tiro italic text-stone-700 text-sm">
@@ -1870,6 +1880,13 @@
         // 1. Login Handler (admin / 123)
         const loginForm = document.getElementById('login-form');
         const loginError = document.getElementById('login-error');
+
+        document.getElementById('autofill-login-btn').addEventListener('click', () => {
+          document.getElementById('agent-id').value = 'admin';
+          document.getElementById('agent-passcode').value = '123';
+          loginError.classList.add('hidden');
+          playSystemTone(520, 0.08);
+        });
 
         loginForm.addEventListener('submit', (e) => {
           e.preventDefault();
